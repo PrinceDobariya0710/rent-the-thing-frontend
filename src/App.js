@@ -12,6 +12,7 @@ import NavBar2 from './component/NavBar2';
 import Slider from './component/Slider.js';
 import Footer from './component/Footer.js';
 import HomeProducts from './component/HomeProducts.js';
+import ProductDetailPage from './Pages/ProductDetailPage';
 
 function App() {
 
@@ -30,32 +31,11 @@ function App() {
 
   return (
     <div className="App">
-      {/* <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="register" element={<RegisterFormComponent/>} />
-        
-      </Routes>
-    </BrowserRouter> */}
   <NavBar></NavBar>
   <NavBar2></NavBar2>
-  <Slider></Slider>
-  <HomeProducts></HomeProducts>
+  <ProductDetailPage></ProductDetailPage>
   <Footer></Footer>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+      
     </div>
   );
 }

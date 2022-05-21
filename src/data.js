@@ -1,3 +1,99 @@
+import img1 from "./ecommerce-photos/shopping1.jpg"
+
+export const RenterAddress = [
+	{
+		"id": 1,
+		"userDetails": {
+			"userDetailsId": 2,
+			"userId": 2,
+			"firstName": "Aditi",
+			"lastName": "Shelat",
+			"orgName": "test Organization",
+			"website": "www.testweb.com",
+			"dob": "1998-05-05"
+		},
+		"flatNo": "Ah-2",
+		"street": "testStreet2",
+		"landmark": "test landmark2",
+		"city": {
+			"cityId": 2,
+			"cityName": "Pune"
+		},
+		"state": {
+			"stateId": 1,
+			"stateName": "Gujarat"
+		},
+		"country": {
+			"countryId": 1,
+			"countryName": "India"
+		},
+		"pincode": 411005
+	}
+]
+
+export const Contact=[
+	{
+		"id": 1,
+		"userDetails": {
+			"userDetailsId": 1,
+			"userId": 5,
+			"firstName": "Aditi",
+			"lastName": "Shelat",
+			"orgName": "test Organization",
+			"website": "www.testweb.com",
+			"dob": "1998-05-05"
+		},
+		"primaryContact": 9601010101,
+		"secondaryContact": 8200812148
+	}
+]
+export const Product = [
+    {
+        "id": 1,
+        "attributeValue": "M",
+        "product": {
+            "id": 1,
+            "userDetailsId": {
+                "userDetailsId": 4,
+                "userId": 4,
+                "firstName": "Rachel",
+                "lastName": "Green",
+                "orgName": null,
+                "website": null,
+                "dob": "1997-03-23"
+            },
+            "Rating":3,
+            "productName": "Wedding-Lehenga",
+            "value_duration": 9000,
+            "product_image": img1,
+            "product_description": "A fine ambroidery lehenga for weddingfnd ced mekj nefk fenkjvef  jednckjfe efklfen fe,edlkenmckle clkemlm",
+            "deposit": 2000,
+            "available_pieces": 10,
+            "product_rate": 60000,
+            "subcategory": {
+                "id": 1,
+                "subCategory_name": "Wedding Wear",
+                "cateGory": {
+                    "id": 1,
+                    "category_name": "clothing"
+                }
+            },
+            "productDurationRates": {
+                "id": 2,
+                "duration": "1 week"
+            }
+        },
+        "attribute": {
+            "id": 1,
+            "attributeTitle": "size",
+            "attributeDescription": "it will describe size of the product"
+        }
+    },
+];
+
+
+
+
 export const sliderItems = [
     {
       id: 1,
