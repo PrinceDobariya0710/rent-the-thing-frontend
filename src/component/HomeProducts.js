@@ -4,19 +4,16 @@ import styled from "styled-components";
 import { products } from "../data";
 import { mobile } from "../Responsive";
 
-const MainContainer = styled.header`
-    display:flex;
-    ${mobile({ flexDirection: "row" ,fontSize:"12px"})}
-`;
-
 const Container = styled.header`
   display: flex;
-  ${mobile({ flexDirection: "column" ,fontSize:"12px"})}
+  padding-left:15%;
+  ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"14%"})}
 `;
 
 const Wrapper = styled.header`
   height: 100%;
   display: list-item;
+  
 `;
 
 const ImgContainer = styled.section`
@@ -42,8 +39,8 @@ const Title = styled.h1`
   ${mobile({ fontSize:"14px" })}
 `;
 
-const Card = styled.header`
-  width: 400px;
+const Card = styled.article`
+  width: 100%;
   height: 500px;
   display: inline-block;
   align-items: center;
@@ -70,7 +67,6 @@ const InfoContainer = styled.section`
 export const HomeProducts = () => {
     const [productIndex, setproductIndex] = useState(0);
   return (
-      <MainContainer>
     <Container>
         <Wrapper>
       {products.map((item) => (
@@ -87,7 +83,6 @@ export const HomeProducts = () => {
       ))}
     </Wrapper>
     </Container>
-    </MainContainer>
   )
 }
 

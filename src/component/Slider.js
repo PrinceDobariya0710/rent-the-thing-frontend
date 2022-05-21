@@ -1,6 +1,6 @@
 import React from 'react';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
@@ -58,7 +58,7 @@ const ImgContainer = styled.section`
 
 const Image = styled.img`
   height: 80%;
-  ${mobile({ height: "250px", width:"250px" ,padding:"3px"})}
+  ${mobile({ height: "250px", width:"200px" })}
 `;
 
 const InfoContainer = styled.section`
@@ -118,7 +118,7 @@ const Slider = () => {
       ))}
     </Wrapper>
     <Arrow direction="right" onClick={() => handleClick("right")}>
-      <ArrowForwardIosIcon />
+    <KeyboardArrowRightIcon/>
     </Arrow>
   </Container>
   )

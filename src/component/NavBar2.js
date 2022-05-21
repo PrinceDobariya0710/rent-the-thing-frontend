@@ -4,7 +4,7 @@ import { mobile } from "../Responsive";
 
 const Container = styled.header`
   height: 60px;
-  background-color: #f7f7f7;
+  background-color: #f4f4f4;
   ${mobile({ height: "40px",width:"100%"})}
 `;
 const Wrapper = styled.header`

@@ -12,7 +12,8 @@ import NavBar2 from './component/NavBar2';
 import Slider from './component/Slider.js';
 import Footer from './component/Footer.js';
 import HomeProducts from './component/HomeProducts.js';
-import ProductDetailPage from './Pages/ProductDetailPage';
+//import ProductDetailPage from './Pages/ProductDetailPage';
+import HomePage from './Pages/HomePage';
 
 function App() {
 
@@ -31,11 +32,7 @@ function App() {
 
   return (
     <div className="App">
-  <NavBar></NavBar>
-  <NavBar2></NavBar2>
-  <ProductDetailPage></ProductDetailPage>
-  <Footer></Footer>
-      
+      <HomePage></HomePage>
     </div>
   );
 }
