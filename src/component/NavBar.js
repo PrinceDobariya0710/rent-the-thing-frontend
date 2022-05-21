@@ -5,96 +5,86 @@ import React from "react";
 import styled from "styled-components";
 import { mobile } from "../Responsive";
 
-const Container = styled.header`
-  height: 60px;
-  background-color: #f7f7f7;
-  ${mobile({ height: "40px",width:"100%"})}
+const Container = styled.div`
+  height: 3%;
+  background-color:#F7E9D7;
+  align-items: center;
+  padding: 0.5%;
+  ${mobile({  })}
 `;
 
-const Wrapper = styled.header`
-  padding: 8px 18px;
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  ${mobile({ padding: "10px 0px" })}
+  
+  ${mobile({ })}
 `;
 
-const Left = styled.section`
+const Left = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
 `;
 
 
-const SearchContainer = styled.section`
+const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
   display: flex;
   align-items: center;
-  margin-left: 10px;
-  padding: 2px;
+  margin-left: 25px;
+  padding: 5px;
 `;
 
 const Input = styled.input`
   border: none;
-  ${mobile({ width: "60px",fontSize: "8px" })}
+  ${mobile({ width: "50px" })}
 `;
 
-const Center = styled.header`
-  flex: 1;
-  text-align: center;
-`;
+
 const Logo = styled.h1`
   font-weight: bold;
-  font-family:Copperplate Gothic Light;
-  padding-top:2px;
-  ${mobile({ fontSize: "15px" })}
+  ${mobile({ fontSize: "18px" })}
 `;
-const Right = styled.section`
+const Right = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  ${mobile({ flex: 2, justifyContent: "center"})}
+  justify-content: space-between;
+  ${mobile({})}
 `;
 
 const MenuItem = styled.section`
   font-size: 14px;
   cursor: pointer;
   margin-left: 25px;
-  ${mobile({ fontSize: "8px", marginLeft: "8px" })}
+  padding: 5%;
+  ${mobile({ fontSize: "10px", marginLeft: "8px" })}
 `;
-
-const NavBar = ()=>
+// ${mobile({ fontSize: "8px", marginLeft: "8px" })}
+const NavBar = ({handleLoginClick,handleRegisterClick})=>
 {
     return (
-        <Container>
-      <Wrapper>
-        <Left>
-          <SearchContainer>
-            <Input placeholder="Search By City" />
-            <SearchIcon style={{ color: "gray", fontSize: 14 }} />
-          </SearchContainer>
-        </Left>
-        <Center>
-          <Logo>RentTheThing</Logo>
-        </Center>
-        <Right>
-            <MenuItem>
+      <Container>
+        <Wrapper>
+          <Left>
+            <Logo>RentTheThing</Logo>
             <SearchContainer>
-            <Input placeholder="Search" />
-            <SearchIcon style={{ color: "gray", fontSize: 14 }} />
-          </SearchContainer>
-          </MenuItem>
-          <MenuItem>REGISTER</MenuItem>
-          <MenuItem>SIGN IN</MenuItem>
-                <MenuItem>
-            <Badge badgeContent={4} color="primary">
-              <ShoppingCartIcon   />
-            </Badge>
-          </MenuItem>      
-        </Right>
-      </Wrapper>
-    </Container>
+                <Input placeholder="Search" />
+                <SearchIcon style={{ color: "gray", fontSize: 14, width: 20, height: 20 }} />
+              </SearchContainer>
+          </Left>
+          <Right>
+            <MenuItem onClick={handleRegisterClick}>REGISTER</MenuItem>
+            <MenuItem onClick={handleLoginClick}>SIGN IN</MenuItem>
+            <MenuItem>
+              <Badge badgeContent={4} color="primary">
+                <ShoppingCartIcon />
+              </Badge>
+            </MenuItem>
+          </Right>
+        </Wrapper>
+      </Container>
     );
 }
 export default NavBar;
