@@ -13,8 +13,8 @@ const Main = styled.main`
     position :absolute;
     z-index: 100;
     top:14%;
-    left:550px;
-    ${mobile({left:"60px"})}
+    left:auto;
+    ${mobile({left:"auto"})}
 `;
 const Formbox = styled.form`
     opacity: 1;
@@ -34,7 +34,7 @@ const LoginText = styled.title`
     margin-top:5%;
     display:flex;
     justify-content:center;
-    align-item:center;  
+    align-items :center ;
     font-family:Copperplate Gothic Light;
     font-size:200%;  
     font-Weight:40%;

@@ -20,9 +20,9 @@ width: 100%;
 height: 90;
 display: flex;
 flex-direction: row;
-flex-wrap: wrap;
+
 ${mobile({flexDirection:"column"})}
-${tablet({width:"100%"})}
+${tablet({width:"100%",flex:"1"})}
 `;
 
 const RightContainer = styled.section`
@@ -34,7 +34,7 @@ display: flex;
 flex-direction: column;
 padding:2%;
 ${mobile({margin:"2%",height:"10%"})}
-${tablet({width:"100%"})}
+${tablet({width:"100%",flex:"1"})}
 `;
 
 const ProductHeaderContainer = styled.article`

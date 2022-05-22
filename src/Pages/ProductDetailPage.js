@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import ProductDetail2 from '../component/ProductDetail2';
-import { mobile } from '../Responsive';
+import { mobile, tablet } from '../Responsive';
 
 
 const MainContainer = styled.main`
@@ -13,6 +13,8 @@ background-color: azure;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 border-radius: 10px;
 ${mobile({margin:"3%",width:"94vw"})}
+${tablet({margin:"auto",width:"94vw"})}
+
 `;
 
 const Wrapper = styled.article`
