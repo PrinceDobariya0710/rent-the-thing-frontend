@@ -1,10 +1,11 @@
-import React from "react";
+import React ,{useState} from "react";
 import './componentstyle.css';
 import Home from "./Home";
 import styled from "styled-components";
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import { mobile } from "../Responsive";
+import axios from 'axios';
 
 const Main = styled.main`
     display:flex;
@@ -88,8 +89,32 @@ cursor: pointer;
       ${mobile({ fontSize:"12px"})}
 `;
 
-const LoginForm = ({ isShowLogin ,RegClick}) =>
+const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
+    const [state, setState] = useState({
+        email:'',
+        password:''
+    })
+
+    const handleChange = (e) => {
+        setState((prevState)=>({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+    const login = async(e) =>{
+        e.preventDefault()
+        console.log('login')
+        let data = {    userName: state.email,
+        password:state.password,
+        roles:{"role_id":2}
+    }
+
+        let res =await  axios.post(`http://localhost:8081/api/auth/login`,data)
+        console.log(res)
+        handleLoginClick()
+        sessionStorage.setItem('temp',JSON.stringify(res))
+    }
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>
@@ -102,14 +127,14 @@ const LoginForm = ({ isShowLogin ,RegClick}) =>
                 <Icon>
                 <PersonSharpIcon></PersonSharpIcon>
                 </Icon>
-                <InputBox placeholder="USERNAME"></InputBox>
+                <InputBox placeholder="USERNAME" name='email' value={state.email} onChange={handleChange}></InputBox>
                     <br></br><br></br>
                     <Icon>
                         <KeySharpIcon></KeySharpIcon>
                     </Icon>
-                    <InputBox placeholder="PASSWORD" type="password"></InputBox>
+                    <InputBox placeholder="PASSWORD" type="password" name='password' value={state.password} onChange={handleChange}></InputBox>
                     <br></br><br></br>
-                    <ButtonSubmit>LOGIN</ButtonSubmit>
+                    <ButtonSubmit onClick={login}>LOGIN</ButtonSubmit>
                     <br></br>
                     <Text>New User?</Text>
                     <LinkText onClick={RegClick}>Create an account!</LinkText>

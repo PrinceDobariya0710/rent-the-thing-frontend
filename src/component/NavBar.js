@@ -1,7 +1,7 @@
 import { Badge } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
-import React from "react";
+import React,{useState} from "react";
 import styled from "styled-components";
 import { mobile } from "../Responsive";
 
@@ -65,6 +65,21 @@ const MenuItem = styled.section`
 // ${mobile({ fontSize: "8px", marginLeft: "8px" })}
 const NavBar = ({handleLoginClick,handleRegisterClick})=>
 {
+  const [Auth,setAuth] = useState(false)
+  const AuthFunction = () =>
+  {
+    let d = JSON.parse(sessionStorage.getItem('temp'))
+    console.log(d)
+  setAuth(d)
+  }
+  React.useEffect(() => {
+    AuthFunction()
+  }, [])
+  const logout = () =>
+  {
+    sessionStorage.removeItem('temp');
+    sessionStorage.clear();
+  }
     return (
       <Container>
         <Wrapper>
@@ -76,8 +91,14 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
               </SearchContainer>
           </Left>
           <Right>
-            <MenuItem onClick={handleRegisterClick}>REGISTER</MenuItem>
-            <MenuItem onClick={handleLoginClick}>SIGN IN</MenuItem>
+            {
+                Auth ? 
+                <MenuItem onClick={logout}>Logout</MenuItem>:
+                <>
+                <MenuItem onClick={handleRegisterClick}>REGISTER</MenuItem>
+                <MenuItem onClick={handleLoginClick}>SIGN IN</MenuItem>
+                </>
+            }
             <MenuItem>
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartIcon />
