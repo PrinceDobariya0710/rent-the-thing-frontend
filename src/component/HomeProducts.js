@@ -81,7 +81,6 @@ export const HomeProducts = () => {
           <ImgContainer>
           <Button>View Detail</Button>
             <Image src={item.img} />
-            
             <InfoContainer>
             <Title>{item.name}</Title>
             <Amount>Rs.{item.amount}</Amount>
