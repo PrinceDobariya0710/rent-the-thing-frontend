@@ -2,12 +2,12 @@ import React from 'react';
 import { useState } from "react";
 import styled from "styled-components";
 import { products } from "../data";
-import { mobile } from "../Responsive";
+import { mobile ,tablet} from "../Responsive";
 
 const Container = styled.header`
   display: flex;
-  padding-left:15%;
-  ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"14%"})}
+  padding-left:0%;
+  ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"10%"})}
 `;
 
 const Wrapper = styled.header`
@@ -23,30 +23,36 @@ const ImgContainer = styled.section`
 
 const Image = styled.img`
   height: 350px;
-  ${mobile({ height: "250px", width:"250px" ,padding:"3px"})}
+  ${mobile({ height: "250px", width:"250px" ,padding:"0px"})}
 `;
 
 const Button = styled.button`
   padding:5px;
   font-size: 10px;
+  width:18.2%;
   background-color: transparent;
   cursor: pointer;
-  ${mobile({ fontSize:"9px",padding:"2px" })}
+  position:absolute;
+  background-color:blue;
+  margin-top:330px;
+  color:white;
+  ${mobile({ fontSize:"10px",padding:"2px" ,})}
 `;
 
 const Title = styled.h1`
   font-size: 20px;
-  ${mobile({ fontSize:"14px" })}
+  ${mobile({ fontSize:"17px" })}
 `;
 
 const Card = styled.article`
-  width: 100%;
+  width: 30%;
   height: 500px;
   display: inline-block;
-  align-items: center;
-  padding:10px;
+  
+  padding:4px;
   background-color: #${(props) => props.bg};
-  ${mobile({ height: "40vh" })}
+  ${mobile({ height: "40vh", width:"60%"})}
+  ${tablet({ height: "40vh",width:"40%"})}
 `;
 
 
@@ -54,13 +60,14 @@ const Amount = styled.p`
   font-size: 15px;
   font-weight: 300;
   letter-spacing: 3px;
-  ${mobile({ fontSize:"10px" })}
+  ${mobile({ fontSize:"13px" })}
 `;
 
 const InfoContainer = styled.section`
-//   flex: 1;
+   flex: 1;
   padding: 10px;
   background-color:;
+  margin-top:12px;
   ${mobile({padding:"0px" })}
 `;
 
@@ -72,7 +79,9 @@ export const HomeProducts = () => {
       {products.map((item) => (
         <Card key={item.id}>
           <ImgContainer>
+          <Button>View Detail</Button>
             <Image src={item.img} />
+            
             <InfoContainer>
             <Title>{item.name}</Title>
             <Amount>Rs.{item.amount}</Amount>
