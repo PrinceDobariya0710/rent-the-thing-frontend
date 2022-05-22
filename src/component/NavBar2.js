@@ -34,10 +34,12 @@ const NavBar2 = () => {
   return (
     <Container>
         <Wrapper>
-            <MenuItem>All Categories</MenuItem>
+            {/* <MenuItem>All Categories</MenuItem>
             <MenuItem>My Orders</MenuItem>
             <MenuItem>Notifications</MenuItem>
-            <MenuItem>Product Inventory</MenuItem>
+            <MenuItem>Product Inventory</MenuItem> */}
+            <MenuItem onClick={traditional}>Traditional Wear</MenuItem>
+            <MenuItem>Wedding Wear</MenuItem>
         </Wrapper>
     </Container>
   )
