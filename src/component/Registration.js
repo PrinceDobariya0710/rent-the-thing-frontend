@@ -4,9 +4,9 @@ import './componentstyle.css';
 import Home from "./Home";
 import { mobile } from "../Responsive";
 import styled from "styled-components";
-
 import EmailIcon from '@mui/icons-material/Email';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
+import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import axios from 'axios';
 
 const Main = styled.main`
@@ -26,7 +26,7 @@ opacity: 1;
 border: 1px solid #f4f4f4;
 border-radius: 2%;
 width:400px;
-height:350px;
+height:550px;
 background-color: #f4f4f4;
 text-align: center;
 letter-spacing: 2px;
@@ -81,7 +81,7 @@ const Text  = styled.text`
 `;
 const Icon = styled.section`
     margin-top: 13px;
-    margin-left:55px;
+    margin-left:73px;
     min-width: 60px;
     position: absolute;
     height:15px;
@@ -95,7 +95,7 @@ margin: 8px 0;
 display: inline-block;
 border: 0;
 border-bottom: 1px solid #ccc;
-padding-left: 10%;
+padding-left: 8%;
 outline: none;
 background: transparent;
 ${mobile({ fontSize:"12px",width:"180px"})}
@@ -123,18 +123,14 @@ cursor: pointer;
       ${mobile({ fontSize:"12px"})}
 `;
 
-const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
-    // const handleClick = (direction) => {
-    //     if (direction === "Next1") {
-    //       setSlideIndex(slideIndex > 0 ? slideIndex + 1 : 1);
-    //     } 
-    //   };
+const Register = ({ isShowRegister,LoginClick,handleRegisterClick }) => {
     const [otpBox,setOtpBox] = useState(false)
     const [passwordBox,setPasswordBox] = useState(false)
 
     const [state, setState] = useState({
         email:'',
-        OTP:0
+        username:'',
+        password:''
     })
 
     const handleChange = (e) => {
@@ -142,20 +138,6 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
             ...prevState,
             [e.target.name]: e.target.value
         }))
-    }
-
-
-    var form1 = document.getElementById("form1");
-    var form2 = document.getElementById("form2");
-    var form3 = document.getElementById("form3");
-    const Next1 = () =>{
-        form1.style.left = "-450px";
-        form2.style.top="-350px";
-        form1.hidden()
-    }
-    const Next2 = () =>
-    {
-
     }
 
     const getOtp = async() =>{
@@ -171,33 +153,63 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
         let res =await  axios.post(`http://localhost:8081/api/auth/verify-otp/?OTP=${otp}`)
         console.log(res)
     }
-    const register = () =>{
-        setPasswordBox(false)
+    // const register = () =>{
+    //     setPasswordBox(false)
+    // }
+    const RegisterClicked = async(e) =>{
+        e.preventDefault()
+        console.log('Register')
+        // let data = {    userName: state.email,
+        // password:state.password,
+        // roles:{"role_id":2}
+        // }
+        const current = new Date();
+        const date = `${current.getFullYear()}-${current.getMonth()+1}-${current.getDate()}`;
+        console.log(date)
+        let data = {    userName: state.username,
+            email: state.email,
+            password:state.password,
+            createdAt:"2022-05-22",
+            role: {"role_id":2}
+        }
+        let res =await  axios.post(`http://localhost:8081/api/auth/signup`,data)
+        console.log(res)
+        handleRegisterClick()
     }
 
   return (
     <Main className= {`${!isShowRegister ? "active" : ""} show `}>
         <section className="reg-form" >
-            
-            {   !otpBox  && !passwordBox &&
                 <RegBox id="form1" >
                 <LoginText>
                     <Text>Register</Text>
                 </LoginText><br></br><br></br>
                 <Icon>
+                <PersonSharpIcon></PersonSharpIcon>
+                </Icon>
+                <InputBox name='username' value={state.username} onChange={handleChange} placeholder="User Name"></InputBox><br></br>
+                <Icon>
                 <EmailIcon></EmailIcon>
                 </Icon>
-                <InputBox name='email' value={state.email} onChange={handleChange} placeholder="Email"></InputBox>
+                <InputBox name='email' value={state.email} onChange={handleChange} placeholder="Email"></InputBox><br></br>
+                <Icon>
+                <KeySharpIcon></KeySharpIcon>
+                </Icon>
+                <InputBox name='password' value={state.password} onChange={handleChange} placeholder="Password"></InputBox><br></br>
+                {/* <Icon>
+                <KeySharpIcon></KeySharpIcon>
+                </Icon>
+                <InputBox name='confirm password' placeholder="Confirm Password"></InputBox> */}
                 <br></br><br></br><br></br>
                 {/* <input type="submit" value="Get OTP" onClick={getOtp} className="login-btn"  direction="Next1"></input> <br></br>
                 <label>Already have an account?</label><span className="link" onClick={LoginClick}>Login here!</span> */}
-                <ButtonSubmit onClick={getOtp}>Get OTP</ButtonSubmit>
+                <ButtonSubmit onClick={RegisterClicked}>Register</ButtonSubmit>
                     <br></br>
                     <Text>Already have an account?</Text>
                     <LinkText onClick={LoginClick}>Login here!</LinkText>
-            </RegBox>}
+            </RegBox>
 
-                {   otpBox && !passwordBox &&
+                {/* {   otpBox && !passwordBox &&
                     <RegBox1 id="form2" >
                     <LoginText>
                     <Text>OTP</Text>
@@ -211,7 +223,7 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
                     <ButtonSubmit onClick={getPassword}>Verify</ButtonSubmit>
                     {/* <input type="submit" value="Verify" onClick={getPassword} className="login-btn"  direction="Next1"></input>  */}
                     <br></br>
-                </RegBox1>}
+                {/* </RegBox1>}
 
             { !otpBox && passwordBox &&
                 <RegBox2 id="form3" >
@@ -229,9 +241,9 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
                 <InputBox placeholder="Confirm Password"></InputBox><br>
             </br><br></br><br></br>
                 {/* <input type="submit" value="Register" onClick={register} className="login-btn" id="next3" direction="Next1"></input>  */}
-                <ButtonSubmit onClick={register}>Register</ButtonSubmit>
+                {/* <ButtonSubmit onClick={register}>Register</ButtonSubmit>
                 <br></br>
-            </RegBox2>}
+            </RegBox2>}  */}
 
     </section>
 </Main>
@@ -240,4 +252,4 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
 
 
 
-export default RegisterFormComponent
+export default Register

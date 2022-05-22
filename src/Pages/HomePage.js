@@ -7,6 +7,7 @@ import LoginForm from '../component/LoginFormComponent';
 import NavBar from '../component/NavBar';
 import NavBar2 from '../component/NavBar2';
 import RegisterFormComponent from '../component/RegisterFormComponent';
+import Register from '../component/Registration';
 import Slider from '../component/Slider';
 import ProductDetailPage from './ProductDetailPage';
 
@@ -52,12 +53,13 @@ const RegClick = () =>
       <>
 
       <NavBar handleLoginClick={handleLoginClick} handleRegisterClick={handleRegisterClick}></NavBar>
-      <LoginForm isShowLogin={isShowLogin} RegClick={RegClick}/>
-      <RegisterFormComponent isShowRegister={isShowRegister} LoginClick={LoginClick}/>
+      <LoginForm isShowLogin={isShowLogin} RegClick={RegClick} handleLoginClick={handleLoginClick}/> 
+      {/* <RegisterFormComponent isShowRegister={isShowRegister} LoginClick={LoginClick}/> */}
+      <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register>
      <NavBar2></NavBar2>
      <Slider></Slider>
-     <ProductDetailPage/>
-     {/* <HomeProducts></HomeProducts> */}
+     {/* <ProductDetailPage/> */}
+     <HomeProducts></HomeProducts>
      <Footer></Footer>
       </>
   )
