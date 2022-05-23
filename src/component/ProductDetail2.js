@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { mobile , tablet } from '../Responsive';
 import {Contact, Product , RenterAddress} from "../data";
 import { Fab, Rating} from '@mui/material';
-import { CurrencyRupee } from '@mui/icons-material';
+import { Close, CurrencyRupee } from '@mui/icons-material';
 import RenterAddressDetail from './RenterAddressDetail';
 import RenterContact from './RenterContact';
 
@@ -112,8 +112,22 @@ const ContactContainer = styled.section`
 const ListItem = styled.li`
 
 `;
+const AddToCartButton = styled.button`
+background:#f5a742;
+width: 8%;
+position: absolute;
+font-size: 0.8rem;
+top: 18%;
+left: 20%;
+margin: 5px;
+padding: 5px;
+border: 1px solid balck;
+border-radius: 2%;
+${mobile({width:"30%",top:"5%",left:"65%"})}
+${tablet({width:"12%",top:"15%",left:"30%"})}
+`;
 
-const ProductDetail2 = () => {
+const ProductDetail2 = ({key}) => {
   return (
     <Wrapper>
         {Product.map(item=>(
@@ -121,13 +135,14 @@ const ProductDetail2 = () => {
         <RightContainer>
             <ProductHeaderContainer>
                 <HeaderText fontWeight="600" fontAlign="left">{item.product.productName} 
+                <AddToCartButton>ADD TO CART</AddToCartButton>
                   <H5Text fontSizeH5="1.1rem" fontWeightH5="400">({item.product.subcategory.cateGory.category_name} - {item.product.subcategory.subCategory_name})</H5Text>
                 </HeaderText>
                 <H3Text fontWeight="300" fontAlign="left">Ratings :<Rating name="read-only"  value={item.product.Rating} readOnly size="small"></Rating></H3Text>
             </ProductHeaderContainer>
             <ImageContainer>
             <hr></hr>
-              <Image src={item.product.product_image}/>
+              <Image  src={`ecommerce-photos/${item.product.product_image}`}/>
             </ImageContainer>
         </RightContainer>
         <ProductDetailContainer>

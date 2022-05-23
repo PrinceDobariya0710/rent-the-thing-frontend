@@ -1,8 +1,13 @@
 import React from 'react';
 import { useState } from "react";
 import styled from "styled-components";
-import { products } from "../data";
+import ProductDetailPage from '../Pages/ProductDetailPage';
+// import { products ,AllProducts } from "../data";
 import { mobile ,tablet} from "../Responsive";
+// const imageBaseUrl =  "./../ecommerce-photos/";
+
+
+
 
 const Container = styled.header`
   display: flex;
@@ -66,31 +71,55 @@ const Amount = styled.p`
 const InfoContainer = styled.section`
    flex: 1;
   padding: 10px;
-  background-color:;
+  
   margin-top:12px;
   ${mobile({padding:"0px" })}
 `;
 
-export const HomeProducts = () => {
-    const [productIndex, setproductIndex] = useState(0);
+
+
+
+export const HomeProducts = ({products}) => {
+
+  const [isShowProduct,setIsShowProduct] = useState(false)
+  const handleProductClick = () => {
+      if(closeProduct===false)
+      {
+        setIsShowProduct((isShowProduct) => !isShowProduct)
+      }else{
+        setIsShowProduct((isShowProduct) => isShowProduct)
+      }
+      console.log("product view click")
+    }
+  
+  const [closeProduct,setCloseProduct] = useState(false)
+  const handleCloseClick = () => {
+      if(isShowProduct===false)
+      {
+        setCloseProduct((closeProduct) => !closeProduct)
+      }
+      else{
+        setCloseProduct((closeProduct) => closeProduct)
+      }
+      console.log("close view click")
+    }
+
   return (
     <Container>
-        <Wrapper>
-      {products.map((item) => (
+       {products.map((item) => ( <Wrapper>
+      
         <Card key={item.id}>
-          <ImgContainer>
-          <Button>View Detail</Button>
-            <Image src={item.img} />
-            
+          <ImgContainer onClick={handleProductClick}>
+            <Image src={`ecommerce-photos/${item.product_image}` }/>
+            <ProductDetailPage key={item.id} isShowProduct={isShowProduct}  closeProduct={closeProduct} handleCloseClick={handleCloseClick}/>
             <InfoContainer>
-            <Title>{item.name}</Title>
-            <Amount>Rs.{item.amount}</Amount>
-            {/* <Button>VIEW PRODUCT</Button> */}
+            <Title>{item.product_name}</Title>
+            <Amount>Rs{item.value_per_duration}</Amount>
           </InfoContainer>
           </ImgContainer>
         </Card>
-      ))}
-    </Wrapper>
+      
+    </Wrapper>))}
     </Container>
   )
 }

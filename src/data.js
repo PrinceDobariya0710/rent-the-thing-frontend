@@ -1,4 +1,76 @@
-import img1 from "./ecommerce-photos/shopping1.jpg"
+
+
+
+
+export const AllProducts = [
+  {
+      "id": 1,
+      "available_pieces": 23,
+      "deposit": 2000,
+      "product_name": "Wedding-Lehenga",
+      "product_description": "A fine ambroidery lehenga for wedding",
+      "product_image": "shopping1.jpg",
+      "product_rate": 60000,
+      "value_per_duration": 9000,
+      "product_duration_rate_id": 2,
+      "subcategory_id": 1,
+      "user_details_id": 1,
+      "sub_category_name": "Wedding Wear",
+      "category_name": "clothing",
+      "attribute_title": "size"
+  },
+  {
+      "id": 7,
+      "available_pieces": 3,
+      "deposit": 1000,
+      "product_name": "Party-dress",
+      "product_description": "Short dress",
+      "product_image": "two.jpg",
+      "product_rate": 6000,
+      "value_per_duration": 800,
+      "product_duration_rate_id": 1,
+      "subcategory_id": 5,
+      "user_details_id": 2,
+      "sub_category_name": "Party Costumes",
+      "category_name": "clothing",
+      "attribute_title": "color"
+  },
+  {
+      "id": 5,
+      "available_pieces": 7,
+      "deposit": 1000,
+      "product_name": "Dress",
+      "product_description": "Traditional long dress",
+      "product_image": "three.jpg",
+      "product_rate": 6000,
+      "value_per_duration": 800,
+      "product_duration_rate_id": 1,
+      "subcategory_id": 2,
+      "user_details_id": 3,
+      "sub_category_name": "Traditional Wear",
+      "category_name": "clothing",
+      "attribute_title": "size"
+  },
+  {
+      "id": 8,
+      "available_pieces": 7,
+      "deposit": 1500,
+      "product_name": "Party-dress",
+      "product_description": "Long black slit dress",
+      "product_image": "four.jpg",
+      "product_rate": 7000,
+      "value_per_duration": 1000,
+      "product_duration_rate_id": 1,
+      "subcategory_id": 5,
+      "user_details_id": 4,
+      "sub_category_name": "Party Costumes",
+      "category_name": "clothing",
+      "attribute_title": "color"
+  }
+]
+
+
+
 
 export const RenterAddress = [
 	{
@@ -47,6 +119,7 @@ export const Contact=[
 		"secondaryContact": 8200812148
 	}
 ]
+
 export const Product = [
     {
         "id": 1,
@@ -65,7 +138,7 @@ export const Product = [
             "Rating":3,
             "productName": "Wedding-Lehenga",
             "value_duration": 9000,
-            "product_image": img1,
+            "product_image": "shopping1.jpg",
             "product_description": "A fine ambroidery lehenga for weddingfnd ced mekj nefk fenkjvef  jednckjfe efklfen fe,edlkenmckle clkemlm",
             "deposit": 2000,
             "available_pieces": 10,

@@ -10,11 +10,16 @@ import RegisterFormComponent from '../component/RegisterFormComponent';
 import Register from '../component/Registration';
 import Slider from '../component/Slider';
 import ProductDetailPage from './ProductDetailPage';
+import axios from 'axios';
 
 export const HomePage = () => {
-    const [isShowLogin,setIsShowLogin] = useState(false)
-  const handleLoginClick = () => {
-    if(isShowRegister==false)
+  
+
+
+
+  const [isShowLogin,setIsShowLogin] = useState(false)
+    const handleLoginClick = () => {
+    if(isShowRegister===false)
     {
       setIsShowLogin((isShowLogin) => !isShowLogin)
     }else{
@@ -22,9 +27,9 @@ export const HomePage = () => {
     }
     console.log("login clicked")
   }
-   const [isShowRegister,setIsShowRegister] = useState(false)
+  const [isShowRegister,setIsShowRegister] = useState(false)
   const handleRegisterClick = () => {
-    if(isShowLogin==false)
+    if(isShowLogin===false)
     {
       setIsShowRegister((isShowRegister) => !isShowRegister)
     }
@@ -33,7 +38,7 @@ export const HomePage = () => {
     }
   }
   const LoginClick = () => {
-  if(isShowRegister==true)
+  if(isShowRegister===true)
   {
     setIsShowRegister(false);
     setIsShowLogin(true);
@@ -42,24 +47,39 @@ export const HomePage = () => {
   
 const RegClick = () =>
 {
-   if(isShowLogin==true)
+   if(isShowLogin===true)
    {
       setIsShowLogin(false);
       setIsShowRegister(true);
    }
   
 }
+const api = axios.create({
+  baseURL: 'http://localhost:5001/',
+ });
+
+const [products, setProducts] = useState([]);
+
+React.useEffect(() => {
+  api.get('/getall')
+  .then(res=>{console.log(res.data)
+    setProducts(res.data)})
+    .catch(error=>{console.log(error)})
+}, []);
+console.log(products)
+if (!products) return null;
+console.log(products)
+
+
   return (
       <>
 
       <NavBar handleLoginClick={handleLoginClick} handleRegisterClick={handleRegisterClick}></NavBar>
       <LoginForm isShowLogin={isShowLogin} RegClick={RegClick} handleLoginClick={handleLoginClick}/> 
-      {/* <RegisterFormComponent isShowRegister={isShowRegister} LoginClick={LoginClick}/> */}
       <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register>
      <NavBar2></NavBar2>
      <Slider></Slider>
-     {/* <ProductDetailPage/> */}
-     <HomeProducts></HomeProducts>
+     <HomeProducts products={products}></HomeProducts>
      <Footer></Footer>
       </>
   )
