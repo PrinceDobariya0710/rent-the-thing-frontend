@@ -53,7 +53,6 @@ const Card = styled.article`
   width: 30%;
   height: 500px;
   display: inline-block;
-  
   padding:4px;
   background-color: #${(props) => props.bg};
   ${mobile({ height: "40vh", width:"60%"})}
@@ -71,7 +70,6 @@ const Amount = styled.p`
 const InfoContainer = styled.section`
    flex: 1;
   padding: 10px;
-  
   margin-top:12px;
   ${mobile({padding:"0px" })}
 `;
