@@ -4,7 +4,6 @@ import './componentstyle.css';
 import Home from "./Home";
 import { mobile } from "../Responsive";
 import styled from "styled-components";
-
 import EmailIcon from '@mui/icons-material/Email';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import axios from 'axios';

@@ -14,9 +14,11 @@ import Footer from './component/Footer.js';
 import HomeProducts from './component/HomeProducts.js';
 //import ProductDetailPage from './Pages/ProductDetailPage';
 import HomePage from './Pages/HomePage';
+import MainProduct from './component/MainProduct';
+import Products from './Pages/Products';
 
 function App() {
-
+ 
  // const navigate = useNavigate();// for navigation
 
   // const [isShowLogin,setIsShowLogin] = useState(false)
@@ -32,7 +34,13 @@ function App() {
 
   return (
     <div className="App">
-      <HomePage></HomePage>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage/>}/>
+        <Route path="/products/:category" element={<Products/>}/>
+      </Routes>
+      </BrowserRouter>
+      
     </div>
   );
 }

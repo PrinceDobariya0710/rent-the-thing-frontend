@@ -10,7 +10,7 @@ export const mobile = (props) => {
 
 export const tablet = (props) => {
   return css`
-  @media screen and (max-width: 800px ) and (min-width: 431px) { // Tablet
+  @media screen and (max-width: 1000px ) and (min-width: 431px) { // Tablet
   ${props}
   }
 

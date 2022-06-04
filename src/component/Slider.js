@@ -4,7 +4,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import { useState } from "react";
 import styled from "styled-components";
 import { sliderItems } from "../data";
-import { mobile } from "../Responsive";
+import { mobile,tablet } from "../Responsive";
 
 const Container = styled.header`
   width: 100%;
@@ -12,8 +12,8 @@ const Container = styled.header`
   display: flex;
   position: relative;
   overflow: hidden;
-  margin-bottom:50px;
   ${mobile({ height: "45vh", width:"100%" })}
+  ${tablet({ height: "55vh", width:"100%" })}
 `;
 
 const Arrow = styled.section`
@@ -49,6 +49,7 @@ const Slide = styled.section`
   align-items: center;
   background-color: #${(props) => props.bg};
   ${mobile({ height: "40vh" })}
+  ${tablet({height: "70vh" })}
 `;
 
 const ImgContainer = styled.section`
@@ -59,17 +60,20 @@ const ImgContainer = styled.section`
 const Image = styled.img`
   height: 80%;
   ${mobile({ height: "250px", width:"200px" })}
+  ${tablet({ height: "450px", width:"300px"})}
 `;
 
 const InfoContainer = styled.section`
   flex: 1;
   padding: 50px;
-  ${mobile({padding:"0px" })}
+  ${tablet({padding:"0px" })}
+  ${mobile({padding:"20px" })}
 `;
 
 const Title = styled.h1`
   font-size: 70px;
   ${mobile({ fontSize:"14px" })}
+  ${tablet({ fontSize:"19px" })}
 `;
 
 const Desc = styled.p`
@@ -78,6 +82,7 @@ const Desc = styled.p`
   font-weight: 500;
   letter-spacing: 3px;
   ${mobile({ fontSize:"10px" })}
+  ${tablet({fontSize:"15px",margin:"0px" })}
 `;
 
 const Button = styled.button`
@@ -86,6 +91,7 @@ const Button = styled.button`
   background-color: transparent;
   cursor: pointer;
   ${mobile({ fontSize:"9px",padding:"2px" })}
+  ${tablet({ fontSize:"13px",padding:"0px"})}
 `;
 
 
@@ -112,7 +118,7 @@ const Slider = () => {
           <InfoContainer>
             <Title>{item.title}</Title>
             <Desc>{item.desc}</Desc>
-            <Button>SHOW NOW</Button>
+            {/* <Button>SHOW NOW</Button> */}
           </InfoContainer>
         </Slide>
       ))}

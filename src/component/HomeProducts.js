@@ -1,24 +1,24 @@
 import React from 'react';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styled from "styled-components";
 import ProductDetailPage from '../Pages/ProductDetailPage';
 // import { products ,AllProducts } from "../data";
 import { mobile ,tablet} from "../Responsive";
 // const imageBaseUrl =  "./../ecommerce-photos/";
-
-
-
+import axios from 'axios';
 
 const Container = styled.header`
   display: flex;
-  padding-left:0%;
-  ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"10%"})}
+  padding-left:6%;
+  ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"0%"})}
+  ${tablet({ paddingLeft:"0%",flexDirection: "column",columnCount: "2"})}
 `;
 
 const Wrapper = styled.header`
   height: 100%;
-  display: list-item;
-  
+  display: block;
+  align-items: center;
+  justify-content:center;
 `;
 
 const ImgContainer = styled.section`
@@ -53,9 +53,9 @@ const Card = styled.article`
   width: 30%;
   height: 500px;
   display: inline-block;
-  padding:4px;
+  padding:60px;
   background-color: #${(props) => props.bg};
-  ${mobile({ height: "40vh", width:"60%"})}
+  ${mobile({ height: "40vh", width:"60%",padding:"5px"})}
   ${tablet({ height: "40vh",width:"40%"})}
 `;
 
@@ -68,55 +68,63 @@ const Amount = styled.p`
 `;
 
 const InfoContainer = styled.section`
-   flex: 1;
+  flex: 1;
   padding: 10px;
   margin-top:12px;
-  ${mobile({padding:"0px" })}
+  width:200px;
+  justify-content:center;
+  ${mobile({padding:"0px"})}
 `;
 
+export const HomeProducts = () => {
+let pro
 
-
-
-export const HomeProducts = ({products}) => {
-
-  const [isShowProduct,setIsShowProduct] = useState(false)
-  const handleProductClick = () => {
-      if(closeProduct===false)
-      {
-        setIsShowProduct((isShowProduct) => !isShowProduct)
-      }else{
-        setIsShowProduct((isShowProduct) => isShowProduct)
-      }
-      console.log("product view click")
-    }
+const [productData,setProductData]=useState()
+  const getLatestProduct = async() =>{
+    let res = await axios.get(`http://localhost:8080/latestproduct/get`)
+    setProductData(res.data)  
+    console.log(productData)
+  }
+  useEffect(() => {
+    getLatestProduct()
+  },[] );
   
-  const [closeProduct,setCloseProduct] = useState(false)
-  const handleCloseClick = () => {
-      if(isShowProduct===false)
-      {
-        setCloseProduct((closeProduct) => !closeProduct)
-      }
-      else{
-        setCloseProduct((closeProduct) => closeProduct)
-      }
-      console.log("close view click")
-    }
+  // const [isShowProduct,setIsShowProduct] = useState(false)
+  // const handleProductClick = () => {
+  //     if(closeProduct===false)
+  //     {
+  //       setIsShowProduct((isShowProduct) => !isShowProduct)
+  //     }else{
+  //       setIsShowProduct((isShowProduct) => isShowProduct)
+  //     }
+  //     console.log("product view click")
+  //   }
+  
+  // const [closeProduct,setCloseProduct] = useState(false)
+  // const handleCloseClick = () => {
+  //     if(isShowProduct===false)
+  //     {
+  //       setCloseProduct((closeProduct) => !closeProduct)
+  //     }
+  //     else{
+  //       setCloseProduct((closeProduct) => closeProduct)
+  //     }
+  //     console.log("close view click")
+  //   }
 
   return (
     <Container>
-       {products.map((item) => ( <Wrapper>
-      
-        <Card key={item.id}>
-          <ImgContainer onClick={handleProductClick}>
-            <Image src={`ecommerce-photos/${item.product_image}` }/>
-            <ProductDetailPage key={item.id} isShowProduct={isShowProduct}  closeProduct={closeProduct} handleCloseClick={handleCloseClick}/>
-            <InfoContainer>
-            <Title>{item.product_name}</Title>
-            <Amount>Rs{item.value_per_duration}</Amount>
-          </InfoContainer>
-          </ImgContainer>
-        </Card>
-      
+      {console.log(pro)}
+       {productData?.map((item) => ( <Wrapper>
+        <Card key={item.product.id}>
+       <ImgContainer>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="250x"/>
+         <InfoContainer>
+         <Title>{item.product.productName}</Title>
+         <Amount>Rs{item.product.value_duration}</Amount>
+       </InfoContainer>
+       </ImgContainer>
+     </Card>
     </Wrapper>))}
     </Container>
   )
