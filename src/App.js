@@ -16,6 +16,8 @@ import HomeProducts from './component/HomeProducts.js';
 import HomePage from './Pages/HomePage';
 import MainProduct from './component/MainProduct';
 import Products from './Pages/Products';
+import { RentCart } from './component/RentCart';
+import { CartPage } from './Pages/CartPage';
 
 function App() {
  
@@ -38,6 +40,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/products/:category" element={<Products/>}/>
+        <Route path="/cart" element={<CartPage/>}/>
       </Routes>
       </BrowserRouter>
       

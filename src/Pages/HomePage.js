@@ -81,4 +81,4 @@ const RegClick = () =>
   )
 }
 
-export default HomePage;
+export default HomePage

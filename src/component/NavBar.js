@@ -71,6 +71,18 @@ const MenuItem = styled.section`
   ${tablet({ fontSize: "14px" })}
   ${mobile({ fontSize: "10px", marginLeft: "8px" })}
 `;
+
+const MenuLink = styled(Link)
+`
+font-size: 14px;
+cursor: pointer;
+margin-left: 25px;
+padding: 5%;
+color:black;
+${tablet({ fontSize: "14px" })}
+${mobile({ fontSize: "10px", marginLeft: "8px" })}
+
+`;
 // ${mobile({ fontSize: "8px", marginLeft: "8px" })}
 const NavBar = ({handleLoginClick,handleRegisterClick})=>
 {
@@ -108,11 +120,11 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
                 <MenuItem onClick={handleLoginClick}>SIGN IN</MenuItem>
                 </>
             }
-            <MenuItem>
+            <MenuLink to="/cart">
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartIcon />
               </Badge>
-            </MenuItem>
+            </MenuLink>
           </Right>
         </Wrapper>
       </Container>

@@ -138,7 +138,7 @@ export const Product = [
             "Rating":3,
             "productName": "Wedding-Lehenga",
             "value_duration": 9000,
-            "product_image": "shopping1.jpg",
+            "product_image": "https://i.ibb.co/TrZMYx5/1.jpg",
             "product_description": "A fine ambroidery lehenga for weddingfnd ced mekj nefk fenkjvef  jednckjfe efklfen fe,edlkenmckle clkemlm",
             "deposit": 2000,
             "available_pieces": 10,
@@ -202,6 +202,8 @@ export const products = [
     img:"https://i.ibb.co/hBVTnsD/2.jpg",
     name: "Wedding Lehenga" ,
     amount:"7000",
+    duration_value:"1 week",
+
   },
   {
     id:3,
