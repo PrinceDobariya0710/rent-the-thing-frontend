@@ -1,13 +1,45 @@
+.cartmain{
+    display: flex;
+    width: 60%;
+    margin:20px auto;
+}
+.productmain
+{
+    width:70%;
+}
+.productcontainer
+{
+    display: flex;
+    margin:15px;
+    border:1px solid rgb(187, 187, 187);
+}
 .c1{
-    width:50%;
+    padding:5px;
 }
 
 .c2{
-    width:50%;
+    text-align: start;
+    width:75%;
 
 }
 
 .c3{
-    width:50%;
-
+    width:5%;
+    cursor: pointer;
+}
+.total
+{
+    width:30%;
+    margin:15px;
+    border:1px solid rgb(187, 187, 187);
+    text-align: center;
+}
+.price{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+}
+hr
+{
+    width: 100%;
 }
