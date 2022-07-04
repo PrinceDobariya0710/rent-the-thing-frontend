@@ -237,6 +237,4 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
   )
 }
 
-
-
 export default RegisterFormComponent

@@ -9,14 +9,18 @@ import axios from 'axios';
 
 const Container = styled.header`
   display: flex;
-  padding-left:6%;
+  // padding-left:3%;
+  width:80%;
   ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"0%"})}
   ${tablet({ paddingLeft:"0%",flexDirection: "column",columnCount: "2"})}
 `;
+const Main = styled.section
+`
 
-const Wrapper = styled.header`
-  height: 100%;
-  display: block;
+`;
+const Wrapper = styled.section`
+ 
+  display: inline-block;
   align-items: center;
   justify-content:center;
 `;
@@ -81,7 +85,7 @@ let pro
 
 const [productData,setProductData]=useState()
   const getLatestProduct = async() =>{
-    let res = await axios.get(`http://localhost:8080/latestproduct/get`)
+    let res = await axios.get(`http://localhost:8084/products/cloth-product/get/all-cproducts/`)
     setProductData(res.data)  
     console.log(productData)
   }
@@ -114,6 +118,7 @@ const [productData,setProductData]=useState()
 
   return (
     <Container>
+      <Main>
       {console.log(pro)}
        {productData?.map((item) => ( <Wrapper>
         <Card key={item.product.id}>
@@ -126,6 +131,7 @@ const [productData,setProductData]=useState()
        </ImgContainer>
      </Card>
     </Wrapper>))}
+    </Main>
     </Container>
   )
 }

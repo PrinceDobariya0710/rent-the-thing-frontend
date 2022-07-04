@@ -5,8 +5,6 @@ import {Link} from 'react-router-dom';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import axios from 'axios';
 import MainProduct from './MainProduct';
-import { WindowRounded } from '@mui/icons-material';
-
 
 const Container = styled.header`
   height: 60px;
@@ -97,7 +95,8 @@ useEffect(() => {
 }, []);
   
   const getSubCategory = async() =>{
-    let res = await axios.get(`http://localhost:8080/subcategory/all`)
+    let res = await axios.get(`http://localhost:8084/products/subcategory/all`)
+    console.log(res)
     data =  res.data
     console.log(data)
   }
@@ -132,7 +131,7 @@ const Dropdown = ({display}) =>
     {data?.map((item) => {
       return (
         // <li>
-        <Menulink to={`/products/${item.subCategory_name}`} key={item.id} onClick={reload} >
+        <Menulink to={`/products/${item.id}`} key={item.id} onClick={reload} >
           {item.subCategory_name}
         </Menulink>
       // </li>

@@ -73,11 +73,13 @@ const InfoContainer = styled.section`
 let data
 export const MainProduct = () => {
     const params = useParams()
-    console.log(params)
+    console.log(params.id)
     const [dataLoad,setdataLoad] = useState()
 
     const getCategoryProduct = async() =>{
-        let res = await axios.get(`http://localhost:8080/categoryproduct/get/${params.category}`)
+        console.log(params.id)
+        let res = await axios.get(`http://localhost:8084/products/cloth-product/get-categorywise-cproduct/?subcategory-id=${params.id}`)
+        console.log(res)
         data =  res.data
         console.log(data)
         setdataLoad(data)

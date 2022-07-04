@@ -39,7 +39,7 @@ function App() {
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="/products/:category" element={<Products/>}/>
+        <Route path="/products/:id" element={<Products/>}/>
         <Route path="/cart" element={<CartPage/>}/>
       </Routes>
       </BrowserRouter>

@@ -29,7 +29,7 @@ export const Cart = () => {
       }
       </section>
       <section className='total'>
-        <h5>PRICE DEATILS</h5>
+        <h5>PRICE DETAILS</h5>
         <hr></hr>
         {Product.map((item) =>
         (
