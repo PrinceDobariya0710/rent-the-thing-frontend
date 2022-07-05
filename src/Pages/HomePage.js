@@ -72,7 +72,8 @@ const RegClick = () =>
       <>
       <NavBar handleLoginClick={handleLoginClick} handleRegisterClick={handleRegisterClick}></NavBar>
       <LoginForm isShowLogin={isShowLogin} RegClick={RegClick} handleLoginClick={handleLoginClick}/> 
-      <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register>
+      <RegisterFormComponent isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></RegisterFormComponent>
+      {/* <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register> */}
      <NavBar2></NavBar2>
      <Slider></Slider>
      <HomeProducts></HomeProducts>

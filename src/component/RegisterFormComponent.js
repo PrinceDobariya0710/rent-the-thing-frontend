@@ -160,14 +160,14 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
     const getOtp = async() =>{
         setOtpBox(true)
         console.log(state.email);
-        let res =await  axios.post(`http://localhost:8081/api/auth/send-otp/?email=${state.email}`)
+        let res =await  axios.post(`http://localhost:8081/auth-service/verification/send-otp/?email=${state.email}`)
         console.log(res)
     }
     const getPassword = async() =>{
         setOtpBox(false)
         setPasswordBox(true)
         let otp = Number(state.OTP)
-        let res =await  axios.post(`http://localhost:8081/api/auth/verify-otp/?OTP=${otp}`)
+        let res =await  axios.post(`http://localhost:8081/auth-service/verification/verify-otp/?OTP=${otp}`)
         console.log(res)
     }
     const register = () =>{
