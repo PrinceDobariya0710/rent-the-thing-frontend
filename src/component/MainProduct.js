@@ -5,15 +5,16 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 const Container = styled.header`
-  display: flex;
-  padding-left:0%;
+  padding-left:6%;
   margin-top:20px;
+  width:90%;
   ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"10%"})}
 `;
 
 const Wrapper = styled.header`
-  height: 100%;
-  display: list-item;
+display: inline-block;
+  align-items: center;
+  justify-content:center;
 `;
 
 const ImgContainer = styled.section`
@@ -22,20 +23,18 @@ const ImgContainer = styled.section`
 `;
 
 const Image = styled.img`
-  height: 350px;
+  height: 100%;
   ${mobile({ height: "250px", width:"250px" ,padding:"0px"})}
 `;
 
 const Button = styled.button`
-  padding:5px;
-  font-size: 10px;
-  width:18.2%;
-  background-color: transparent;
-  cursor: pointer;
-  position:absolute;
-  background-color:blue;
-  margin-top:330px;
-  color:white;
+padding:8px 25px;
+font-size: 10px;
+background-color: transparent;
+width:100%;
+background-color:#F7E9D7;
+border:none;
+border-top: 1px solid gray;
   ${mobile({ fontSize:"10px",padding:"2px" ,})}
 `;
 
@@ -45,11 +44,10 @@ const Title = styled.h1`
 `;
 
 const Card = styled.article`
-  width: 30%;
-  height: 500px;
-  display: inline-block;
-  padding:4px;
-  background-color: #${(props) => props.bg};
+  height: 404px;
+  margin:60px;
+  border:1px solid gray;
+  width:220px;
   ${mobile({ height: "40vh", width:"60%"})}
   ${tablet({ height: "40vh",width:"40%"})}
 `;
@@ -63,10 +61,11 @@ const Amount = styled.p`
 `;
 
 const InfoContainer = styled.section`
-   flex: 1;
-  padding: 10px;
-  margin-top:12px;
+  //  flex: 1;
+  // padding: 10px;
+  // margin-top:12px;
   width:200px;
+  justify-content:center;
   ${mobile({padding:"0px" })}
 `;
 
@@ -95,12 +94,13 @@ export const MainProduct = () => {
    
      <Card key={item.product.id}>
        <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="250x"/>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%"/>
+         </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>
          <Amount>Rs{item.product.value_duration}</Amount>
        </InfoContainer>
-       </ImgContainer>
+       <Button>AddToCart</Button>
      </Card>
  </Wrapper>))}
  </Container>

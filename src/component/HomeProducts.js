@@ -29,12 +29,13 @@ const Image = styled.img`
 `;
 
 const Button = styled.button`
-  padding:5px 25px;
+  padding:8px 25px;
   font-size: 10px;
   background-color: transparent;
   width:100%;
-  background-color:blue;
-  color:white;
+  background-color:#F7E9D7;
+  border:none;
+  border-top: 1px solid gray;
   ${mobile({ fontSize:"10px",padding:"2px" ,})}
 `;
 
@@ -44,7 +45,7 @@ const Title = styled.h1`
 `;
 
 const Card = styled.article`
-  height: 350px;
+  height: 404px;
   // display: inline-block;
   margin:60px;
   border:1px solid gray;
@@ -61,11 +62,10 @@ const Amount = styled.p`
 
 const InfoContainer = styled.section`
   // flex: 1;
-  padding: 10px;
-  margin-top:12px;
+  // padding: 10px;
+  // margin-top: 5px;
   width:200px;
   justify-content:center;
-  // border:1px solid gray;
   ${mobile({padding:"0px"})}
 `;
 
