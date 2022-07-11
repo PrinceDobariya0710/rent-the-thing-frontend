@@ -19,6 +19,7 @@ import Products from './Pages/Products';
 import { RentCart } from './component/RentCart';
 import { CartPage } from './Pages/CartPage';
 import { OrderHistoryPage } from './Pages/OrderHistoryPage';
+import { ProfilePage } from './Pages/ProfilePage';
 
 function App() {
  
@@ -43,6 +44,7 @@ function App() {
         <Route path="/products/:id" element={<Products/>}/>
         <Route path="/cart" element={<CartPage/>}/>
         <Route path='/order' element={<OrderHistoryPage/>}/>
+        <Route path='/profile' element={<ProfilePage/>}/>
       </Routes>
       </BrowserRouter>
       

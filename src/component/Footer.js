@@ -5,6 +5,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import PhoneIphoneRoundedIcon from '@mui/icons-material/PhoneIphoneRounded';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import { Link } from "react-router-dom";
 
 const Container = styled.header`
   display: flex;
@@ -65,9 +66,11 @@ const List = styled.ul`
   flex-wrap: wrap;
 `;
 
-const ListItem = styled.li`
+const ListItem = styled(Link)`
   width: 50%;
   margin-bottom: 10px;
+  color:black;
+  text-decoration:none;
 `;
 
 const Right = styled.section`
@@ -106,11 +109,11 @@ const Footer = () => {
       <Center>
         <Title>Useful Links</Title>
         <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Cart</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
+          <ListItem to='/'>Home</ListItem>
+          <ListItem to='/cart'>Cart</ListItem>
+          <ListItem to='/profile'>My Account</ListItem>
+          <ListItem to='/'>Wishlist</ListItem>
+          <ListItem to='/'>Terms</ListItem>
         </List>
       </Center>
       <Right>

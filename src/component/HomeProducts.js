@@ -2,24 +2,17 @@ import React from 'react';
 import { useState,useEffect } from "react";
 import styled from "styled-components";
 import ProductDetailPage from '../Pages/ProductDetailPage';
-// import { products ,AllProducts } from "../data";
 import { mobile ,tablet} from "../Responsive";
-// const imageBaseUrl =  "./../ecommerce-photos/";
 import axios from 'axios';
 
 const Container = styled.header`
-  display: flex;
-  // padding-left:3%;
-  width:80%;
+  padding-left:6%;
+  width:90%;
   ${mobile({ flexDirection: "column" ,fontSize:"12px",paddingLeft:"0%"})}
   ${tablet({ paddingLeft:"0%",flexDirection: "column",columnCount: "2"})}
 `;
-const Main = styled.section
-`
 
-`;
 const Wrapper = styled.section`
- 
   display: inline-block;
   align-items: center;
   justify-content:center;
@@ -31,19 +24,16 @@ const ImgContainer = styled.section`
 `;
 
 const Image = styled.img`
-  height: 350px;
+  height: 100%;
   ${mobile({ height: "250px", width:"250px" ,padding:"0px"})}
 `;
 
 const Button = styled.button`
-  padding:5px;
+  padding:5px 25px;
   font-size: 10px;
-  width:18.2%;
   background-color: transparent;
-  cursor: pointer;
-  position:absolute;
+  width:100%;
   background-color:blue;
-  margin-top:330px;
   color:white;
   ${mobile({ fontSize:"10px",padding:"2px" ,})}
 `;
@@ -54,16 +44,14 @@ const Title = styled.h1`
 `;
 
 const Card = styled.article`
-  width: 30%;
-  height: 500px;
-  display: inline-block;
-  padding:60px;
-  background-color: #${(props) => props.bg};
+  height: 350px;
+  // display: inline-block;
+  margin:60px;
+  border:1px solid gray;
+  width:220px;
   ${mobile({ height: "40vh", width:"60%",padding:"5px"})}
   ${tablet({ height: "40vh",width:"40%"})}
 `;
-
-
 const Amount = styled.p`
   font-size: 15px;
   font-weight: 300;
@@ -72,11 +60,12 @@ const Amount = styled.p`
 `;
 
 const InfoContainer = styled.section`
-  flex: 1;
+  // flex: 1;
   padding: 10px;
   margin-top:12px;
   width:200px;
   justify-content:center;
+  // border:1px solid gray;
   ${mobile({padding:"0px"})}
 `;
 
@@ -118,20 +107,20 @@ const [productData,setProductData]=useState()
 
   return (
     <Container>
-      <Main>
       {console.log(pro)}
        {productData?.map((item) => ( <Wrapper>
         <Card key={item.product.id}>
-       <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="250x"/>
+        <ImgContainer>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%"/>
+         </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>
          <Amount>Rs{item.product.value_duration}</Amount>
        </InfoContainer>
-       </ImgContainer>
+       <Button>AddToCart</Button>
      </Card>
-    </Wrapper>))}
-    </Main>
+    </Wrapper>
+    ))}
     </Container>
   )
 }
