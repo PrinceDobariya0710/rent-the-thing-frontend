@@ -107,10 +107,8 @@ useEffect(() => {
             <MenuItem onClick={()=>{
               setDropdownstate(prevState=>!prevState)
               console.log(dropdownstate)
-
             }}>All Categories<KeyboardArrowDownIcon></KeyboardArrowDownIcon></MenuItem> <Dropdown display={dropdownstate}/>
-            
-            <NavLink to="/">My Orders</NavLink>
+            <NavLink to="/order">My Orders</NavLink>
             <NavLink to="/">Notifications</NavLink>
             <NavLink to="/">Product Inventory</NavLink>
         </Wrapper>
