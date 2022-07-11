@@ -1,11 +1,11 @@
 .ordermain{
     display: flex;
-    width: 60%;
+    width: 65%;
     margin:20px auto;
 }
 .producthmain
 {
-    width:70%;
+    width:100%;
 }
 .producthcontainer
 {
@@ -18,13 +18,15 @@
 }
 
 .c2{
+    margin-top: 2%;
     text-align: start;
-    width:75%;
+    width:45%;
 }
 
 .c3{
-    width:5%;
-    cursor: pointer;
+    margin-top: 5%;
+    width:15%;
+    text-align: start;
 }
 hr
 {
