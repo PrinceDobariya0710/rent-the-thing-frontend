@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import ProductDetail2 from '../component/ProductDetail2';
 import { mobile, tablet } from '../Responsive';
 
-
 const MainContainer = styled.main`
 margin: auto;
 padding: 5px;
@@ -20,8 +19,6 @@ border-radius: 10px;
 ${mobile({margin:"3%",width:"94vw", top:"100px",left:"5px",right:"5px"})}
 ${tablet({margin:"auto",width:"94vw"})}
 `;
-
-
 
 const ProductDetailPage = ({ key , isShowProduct,closeProduct,handleCloseClick}) => {
   return (

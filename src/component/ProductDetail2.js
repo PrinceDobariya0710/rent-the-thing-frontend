@@ -6,12 +6,12 @@ import { Fab, Rating} from '@mui/material';
 import { Close, CurrencyRupee } from '@mui/icons-material';
 import RenterAddressDetail from './RenterAddressDetail';
 import RenterContact from './RenterContact';
-
+import axios from 'axios';
+import { useState,useEffect } from "react";
 
 const Wrapper = styled.article`
 
 `;
-
 
 const MainContainer = styled.main`
 border: 1px solid black;
@@ -20,7 +20,6 @@ width: 100%;
 height: 90;
 display: flex;
 flex-direction: row;
-
 ${mobile({flexDirection:"column"})}
 ${tablet({width:"100%",flex:"1"})}
 `;
@@ -114,11 +113,8 @@ const ListItem = styled.li`
 `;
 const AddToCartButton = styled.button`
 background:#f5a742;
-width: 8%;
-position: absolute;
+position: relative;
 font-size: 0.8rem;
-top: 18%;
-left: 20%;
 margin: 5px;
 padding: 5px;
 border: 1px solid balck;
@@ -127,42 +123,55 @@ ${mobile({width:"30%",top:"5%",left:"65%"})}
 ${tablet({width:"12%",top:"15%",left:"30%"})}
 `;
 
-const ProductDetail2 = ({key}) => {
+const ProductDetail2 = () => {
+  const [DetailData,setDetailData]=useState()
+  let data
+  const getDetailProduct = async() =>{
+    let res = await axios.get(`http://localhost:8084/products/product/product_by_product_id/?product_id=21`)
+    data = res.data
+    console.log(data)
+    setDetailData(data)
+  }
+  useEffect(() => {
+    getDetailProduct()
+  },[] );
   return (
     <Wrapper>
-        {Product.map(item=>(
+    {/* {data?.map((item) => ( */}
     <MainContainer>
         <RightContainer>
             <ProductHeaderContainer>
-                <HeaderText fontWeight="600" fontAlign="left">{item.product.productName} 
-                <AddToCartButton>ADD TO CART</AddToCartButton>
-                  <H5Text fontSizeH5="1.1rem" fontWeightH5="400">({item.product.subcategory.cateGory.category_name} - {item.product.subcategory.subCategory_name})</H5Text>
+                <HeaderText fontWeight="600" fontAlign="left">{DetailData?.clothingProducts.product.productName} 
+                {/* <AddToCartButton>ADD TO CART</AddToCartButton> */}
+                  <H5Text fontSizeH5="1.1rem" fontWeightH5="400">({DetailData?.clothingProducts.product.subcategory.cateGory.category_name} - {DetailData?.clothingProducts.product.subcategory.subCategory_name})</H5Text>
                 </HeaderText>
-                <H3Text fontWeight="300" fontAlign="left">Ratings :<Rating name="read-only"  value={item.product.Rating} readOnly size="small"></Rating></H3Text>
+                {/* <H3Text fontWeight="300" fontAlign="left">Ratings :<Rating name="read-only"  value={DetailData?.product.Rating} readOnly size="small"></Rating></H3Text> */}
             </ProductHeaderContainer>
             <ImageContainer>
             <hr></hr>
-              <Image  src={`ecommerce-photos/${item.product.product_image}`}/>
+              <Image  src={`ecommerce-photos/${DetailData?.clothingProducts.product.product_image}`}/>
             </ImageContainer>
         </RightContainer>
         <ProductDetailContainer>
             <H3Text fontWeight="500" fontAlign="left" textDeco="solid">
-            Available pieces : <Fab color="primary" aria-label="available pieces" size="small">{item.product.available_pieces}</Fab>
+            Available pieces : <Fab color="primary" aria-label="available pieces" size="small">{DetailData?.clothingProducts.product.available_pieces}</Fab>
             </H3Text>
             <H3Text fontWeight="400" fontAlign="left">About this Product</H3Text>
             <hr/>
             <AboutProductList fontAlign="left" fontSize="1.1rem">
-              <ListItem><H5Text fontSizeH5="1.0em">Size : </H5Text>{item.attributeValue} </ListItem>
+              <ListItem><H5Text fontSizeH5="1.0em">Size : </H5Text>{DetailData?.clothingProducts.size} </ListItem>
               <hr/>
-              <ListItem><H5Text fontSizeH5="1.0em">Description : </H5Text>{item.product.product_description}</ListItem>
+              <ListItem><H5Text fontSizeH5="1.0em">Description : </H5Text>{DetailData?.clothingProducts.product.product_description}</ListItem>
               <hr/>
               <ListItem><H5Text fontSizeH5="1.0em">Pricing :</H5Text>
               <hr/>
                 <AboutProductList>
-                  <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Rent price per {item.product.productDurationRates.duration} : {item.product.value_duration}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
-                  <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Product Price : {item.product.product_rate}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
-                  <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Deposite : {item.product.deposit}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
+                  <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Rent price per {DetailData?.clothingProducts.product.productDurationRates.duration} : {DetailData?.clothingProducts.product.value_duration}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
+                  <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Product Price : {DetailData?.clothingProducts.product.product_rate}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
+                  <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Deposite : {DetailData?.clothingProducts.product.deposit}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
                 </AboutProductList>
+                Select the Date: <input type="date" /> 
+                <AddToCartButton >ADD TO CART</AddToCartButton>
               </ListItem>
               <ListItem><H5Text fontSizeH5="1.0em">Renter info :</H5Text>
               <hr/>
@@ -176,16 +185,15 @@ const ProductDetail2 = ({key}) => {
                 <ContactContainer> 
                 {Contact.map(item=>(<AboutProductList>
                   <RenterContact item={item} key={item.id}/>
-                </AboutProductList>))}           
-                      
+                </AboutProductList>
+                ))}               
                 </ContactContainer>
               </RenterContainer>
               </ListItem>
             </AboutProductList>
         </ProductDetailContainer>
-
     </MainContainer>
-    ))}
+    {/* ))} */}
     </Wrapper>
   )
 }

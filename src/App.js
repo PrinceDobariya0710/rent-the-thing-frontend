@@ -20,6 +20,7 @@ import { RentCart } from './component/RentCart';
 import { CartPage } from './Pages/CartPage';
 import { OrderHistoryPage } from './Pages/OrderHistoryPage';
 import { ProfilePage } from './Pages/ProfilePage';
+import { DetailPage } from './Pages/DetailPage';
 
 function App() {
  
@@ -45,6 +46,7 @@ function App() {
         <Route path="/cart" element={<CartPage/>}/>
         <Route path='/order' element={<OrderHistoryPage/>}/>
         <Route path='/profile' element={<ProfilePage/>}/>
+        <Route path='/detail' element={<DetailPage/>}/>
       </Routes>
       </BrowserRouter>
       

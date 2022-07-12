@@ -44,7 +44,7 @@ const Title = styled.h1`
 `;
 
 const Card = styled.article`
-  height: 404px;
+  height: 390px;
   margin:60px;
   border:1px solid gray;
   width:220px;
@@ -57,6 +57,7 @@ const Amount = styled.p`
   font-size: 15px;
   font-weight: 300;
   letter-spacing: 3px;
+  margin-bottom:1px;
   ${mobile({ fontSize:"13px" })}
 `;
 

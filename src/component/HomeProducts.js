@@ -19,13 +19,13 @@ const Wrapper = styled.section`
 `;
 
 const ImgContainer = styled.section`
-  height: 300px;
+  height: 79%;
   flex: 1;
 `;
 
 const Image = styled.img`
   height: 100%;
-  ${mobile({ height: "250px", width:"250px" ,padding:"0px"})}
+  ${mobile({ height: "250px" ,padding:"0px"})}
 `;
 
 const Button = styled.button`
@@ -41,22 +41,23 @@ const Button = styled.button`
 
 const Title = styled.h1`
   font-size: 20px;
-  ${mobile({ fontSize:"17px" })}
+  ${mobile({  })}
 `;
 
 const Card = styled.article`
-  height: 404px;
+  height: 20%;
   // display: inline-block;
   margin:60px;
   border:1px solid gray;
   width:220px;
   ${mobile({ height: "40vh", width:"60%",padding:"5px"})}
-  ${tablet({ height: "40vh",width:"40%"})}
+  ${tablet({ height: "50vh",width:"50%"})}
 `;
 const Amount = styled.p`
   font-size: 15px;
   font-weight: 300;
   letter-spacing: 3px;
+  margin-bottom:1px;
   ${mobile({ fontSize:"13px" })}
 `;
 
