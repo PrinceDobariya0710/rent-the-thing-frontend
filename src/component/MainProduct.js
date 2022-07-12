@@ -73,15 +73,15 @@ const InfoContainer = styled.section`
 let data
 export const MainProduct = () => {
     const params = useParams()
-    console.log(params.id)
+    // console.log(params.id)
     const [dataLoad,setdataLoad] = useState()
 
     const getCategoryProduct = async() =>{
-        console.log(params.id)
+        // console.log(params.id)
         let res = await axios.get(`http://localhost:8084/products/cloth-product/get-categorywise-cproduct/?subcategory-id=${params.id}`)
-        console.log(res)
+        // console.log(res)
         data =  res.data
-        console.log(data)
+        // console.log(data)
         setdataLoad(data)
       }
       
@@ -89,23 +89,25 @@ export const MainProduct = () => {
         getCategoryProduct()
     }, [ getCategoryProduct]);
 
+    const ShowDetail = () =>
+    {
+      console.log("hello")
+    }
   return (
     <Container>
     {dataLoad?.map((item) => ( <Wrapper>
-   
-     <Card key={item.product.id}>
+     <Card key={item.product.id} >
        <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%"/>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail()}/>
          </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>
          <Amount>Rs{item.product.value_duration}</Amount>
        </InfoContainer>
-       <Button>AddToCart</Button>
+      <Button>AddToCart</Button>
      </Card>
  </Wrapper>))}
- </Container>
-    
+ </Container>  
   )
 }
 

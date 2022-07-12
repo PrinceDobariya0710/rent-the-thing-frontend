@@ -128,18 +128,15 @@ const Dropdown = ({display}) =>
     <ul style={ulcss}>
     {data?.map((item) => {
       return (
-        // <li>
-        <Menulink to={`/products/${item.id}`} key={item.id} onClick={reload} >
+        <Menulink to={`/products/${item.id}`} key={item.id} onClick={reload}>
           {item.subCategory_name}
         </Menulink>
-      // </li>
     );
   })
 }
   </ul>
 )  
 }
-  
 }
 
 export default NavBar2

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { mobile , tablet } from '../Responsive';
-import {Contact, Product , RenterAddress} from "../data";
+import {Contact, RenterAddress} from "../data";
 import { Fab, Rating} from '@mui/material';
 import { Close, CurrencyRupee } from '@mui/icons-material';
 import RenterAddressDetail from './RenterAddressDetail';
