@@ -6,16 +6,19 @@ import React, {useState} from "react";
 import {useNavigate,BrowserRouter, Routes, Route} from 'react-router-dom';
 //import ProductDetailPage from './Pages/ProductDetailPage';
 import HomePage from './Pages/HomePage';
-import MainProduct from './component/MainProduct';
 import Products from './Pages/Products';
 import { CartPage } from './Pages/CartPage';
 import { OrderHistoryPage } from './Pages/OrderHistoryPage';
 import { ProfilePage } from './Pages/ProfilePage';
 import { DetailPage } from './Pages/DetailPage';
 import {LoginContext} from './context/LoginContext';
+import { ManageProductPage } from './Pages/ManageProductPage';
+
 function App() {
+  const [isToken,setisToken] = useState()
   return (
     <div className="App">
+      <LoginContext.Provider value={{isToken,setisToken}}>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
@@ -24,10 +27,10 @@ function App() {
         <Route path='/order' element={<OrderHistoryPage/>}/>
         <Route path='/profile' element={<ProfilePage/>}/>
         <Route path='/detail/:id' element={<DetailPage/>}/>
+        <Route path='/inventory' element={<ManageProductPage/>}/>
+        
       </Routes>
       </BrowserRouter>
-      <LoginContext.Provider>
-        
       </LoginContext.Provider>
     </div>
   );

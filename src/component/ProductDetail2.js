@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useContext} from 'react'
 import styled from 'styled-components';
 import { mobile , tablet } from '../Responsive';
 import {Contact, RenterAddress} from "../data";
@@ -8,6 +8,7 @@ import RenterAddressDetail from './RenterAddressDetail';
 import RenterContact from './RenterContact';
 import axios from 'axios';
 import { useState,useEffect } from "react";
+import { LoginContext } from '../context/LoginContext';
 
 const Wrapper = styled.article`
 
@@ -115,8 +116,8 @@ const AddToCartButton = styled.button`
 background:#f5a742;
 position: relative;
 font-size: 0.8rem;
-margin: 5px;
-padding: 5px;
+margin: 0.5%;
+padding: 0.5%;
 border: 1px solid balck;
 border-radius: 2%;
 ${mobile({width:"30%",top:"5%",left:"65%"})}
@@ -127,13 +128,14 @@ const ProductDetail2 = ({id}) => {
   const [DetailData,setDetailData]=useState()
   const [AddressData,setAddressData]=useState()
   const [ContactData,setContactData]=useState()
+  const {isToken} = useContext(LoginContext)
   let data
   let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc2ODI1MTgsImlhdCI6MTY1NzY0NjUxOH0.qEwiV4ozWgpCT_GgbHvI3mCjhnePM6qG2ibh6eiAv2Q"
   const getDetailProduct = async() =>{
     const create = axios.create({
-      baseURL: `http://localhost:8084/products/product/product_by_product_id/?product_id=${id}`,
+      baseURL: `http://localhost:8080/products/product/product_by_product_id/?product_id=${id}`,
       timeout: 1000,
-      headers: {'Authorization': 'Bearer '+token}
+      headers: {'Authorization': 'Bearer '+isToken}
     });
     let res = await create.get(``)
     data = res.data
@@ -181,7 +183,7 @@ const ProductDetail2 = ({id}) => {
                   <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Product Price : {DetailData?.clothingProducts.product.product_rate}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
                   <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Deposite : {DetailData?.clothingProducts.product.deposit}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
                 </AboutProductList>
-                Select the Date: <input type="date" /> 
+                Date: <input type="date" /> 
                 <AddToCartButton >ADD TO CART</AddToCartButton>
               </ListItem>
               <ListItem><H5Text fontSizeH5="1.0em">Renter info :</H5Text>

@@ -112,7 +112,6 @@ const Footer = () => {
           <ListItem to='/'>Home</ListItem>
           <ListItem to='/cart'>Cart</ListItem>
           <ListItem to='/profile'>My Account</ListItem>
-          <ListItem to='/'>Wishlist</ListItem>
           <ListItem to='/'>Terms</ListItem>
         </List>
       </Center>

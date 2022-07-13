@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React ,{useState,useContext} from "react";
 import './componentstyle.css';
 import Home from "./Home";
 import styled from "styled-components";
@@ -6,6 +6,7 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import { mobile } from "../Responsive";
 import axios from 'axios';
+import { LoginContext } from "../context/LoginContext";
 
 const Main = styled.main`
     display:flex;
@@ -92,6 +93,7 @@ cursor: pointer;
 
 const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
+    const {setisToken} = useContext(LoginContext)
     const [state, setState] = useState({
         email:'',
         password:''
@@ -110,11 +112,11 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
         password:state.password,
         roles:{"role_id":2}
     }
-
         let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
-        console.log(res)
+        console.log(res.data.token)
         handleLoginClick()
-        localStorage.setItem('renthething',JSON.stringify(res))
+        setisToken(JSON.stringify(res.data.token))
+        localStorage.setItem('temp',JSON.stringify(res))
     }
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
