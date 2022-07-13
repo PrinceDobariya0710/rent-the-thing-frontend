@@ -95,7 +95,7 @@ useEffect(() => {
 }, []);
   
   const getSubCategory = async() =>{
-    let res = await axios.get(`http://localhost:8084/products/subcategory/all`)
+    let res = await axios.get(`http://localhost:8080/products/subcategory/all`)
     console.log(res)
     data =  res.data
     console.log(data)

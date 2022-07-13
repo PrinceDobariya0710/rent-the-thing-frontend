@@ -1,5 +1,7 @@
 import { createContext } from "react";
 
-const LoginContext = createContext();
+export const LoginContext = createContext({
+    RentTheThingToken : null
+});
 
-export default LoginContext;
+// export default LoginContext;

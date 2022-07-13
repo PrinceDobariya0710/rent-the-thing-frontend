@@ -123,21 +123,32 @@ ${mobile({width:"30%",top:"5%",left:"65%"})}
 ${tablet({width:"12%",top:"15%",left:"30%"})}
 `;
 
-const ProductDetail2 = () => {
+const ProductDetail2 = ({id}) => {
   const [DetailData,setDetailData]=useState()
+  const [AddressData,setAddressData]=useState()
+  const [ContactData,setContactData]=useState()
   let data
+  let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc2ODI1MTgsImlhdCI6MTY1NzY0NjUxOH0.qEwiV4ozWgpCT_GgbHvI3mCjhnePM6qG2ibh6eiAv2Q"
   const getDetailProduct = async() =>{
-    let res = await axios.get(`http://localhost:8084/products/product/product_by_product_id/?product_id=21`)
+    const create = axios.create({
+      baseURL: `http://localhost:8084/products/product/product_by_product_id/?product_id=${id}`,
+      timeout: 1000,
+      headers: {'Authorization': 'Bearer '+token}
+    });
+    let res = await create.get(``)
     data = res.data
     console.log(data)
     setDetailData(data)
+    setAddressData(data.userDetails.address.data)
+    setContactData(data.userDetails.contact.data)
   }
   useEffect(() => {
     getDetailProduct()
   },[] );
   return (
+
     <Wrapper>
-    {/* {data?.map((item) => ( */}
+    {/* {data?.map((item) => ( */}.
     <MainContainer>
         <RightContainer>
             <ProductHeaderContainer>
@@ -149,7 +160,7 @@ const ProductDetail2 = () => {
             </ProductHeaderContainer>
             <ImageContainer>
             <hr></hr>
-              <Image  src={`ecommerce-photos/${DetailData?.clothingProducts.product.product_image}`}/>
+              <Image src={`/ecommerce-photos/${DetailData?.clothingProducts.product.product_image}`}/>
             </ImageContainer>
         </RightContainer>
         <ProductDetailContainer>
@@ -177,16 +188,16 @@ const ProductDetail2 = () => {
               <hr/>
               <RenterContainer>
                 <AddressContainer>
-                {RenterAddress.map(item=>(<AboutProductList>
-                <ListItem><ParaText>Rented By : {item.userDetails.firstName}</ParaText></ListItem>
-                  <RenterAddressDetail item={item} key={item.id} />
-                </AboutProductList>))}
+                <AboutProductList>
+                <ListItem><ParaText>Rented By : {DetailData?.clothingProducts.product.userDetailsId.firstName}</ParaText></ListItem>
+              {/* {DetailData?.userDetails.address} */}
+                  {/* <RenterAddressDetail item={AddressData} key={DetailData?.clothingProducts.product.userDetailsId} />  */}
+                </AboutProductList>
                 </AddressContainer>
                 <ContactContainer> 
-                {Contact.map(item=>(<AboutProductList>
-                  <RenterContact item={item} key={item.id}/>
+                <AboutProductList>
+                  {/* <RenterContact item={ContactData} key={DetailData?.clothingProducts.product.clothingProductId}/> */}
                 </AboutProductList>
-                ))}               
                 </ContactContainer>
               </RenterContainer>
               </ListItem>

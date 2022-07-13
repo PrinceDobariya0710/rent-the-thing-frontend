@@ -33,7 +33,7 @@ const Button = styled.button`
   font-size: 10px;
   background-color: transparent;
   width:100%;
-  background-color:#F7E9D7;
+  background-color:#f19d65;
   border:none;
   border-top: 1px solid gray;
   ${mobile({ fontSize:"10px",padding:"2px" ,})}
@@ -75,7 +75,7 @@ let pro
 
 const [productData,setProductData]=useState()
   const getLatestProduct = async() =>{
-    let res = await axios.get(`http://localhost:8084/products/cloth-product/get/all-cproducts/`)
+    let res = await axios.get(`http://localhost:8080/products/cloth-product/user/get/all-cproducts/`)
     setProductData(res.data)  
     console.log(productData)
   }

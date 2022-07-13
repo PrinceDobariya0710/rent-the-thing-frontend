@@ -2,7 +2,8 @@ import React,{useState,useEffect, Component} from 'react';
 import styled from "styled-components";
 import { mobile ,tablet} from "../Responsive";
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
+
 
 const Container = styled.header`
   padding-left:6%;
@@ -32,7 +33,7 @@ padding:8px 25px;
 font-size: 10px;
 background-color: transparent;
 width:100%;
-background-color:#F7E9D7;
+background-color:#f19d65;
 border:none;
 border-top: 1px solid gray;
   ${mobile({ fontSize:"10px",padding:"2px" ,})}
@@ -73,12 +74,13 @@ const InfoContainer = styled.section`
 let data
 export const MainProduct = () => {
     const params = useParams()
+    const navigate = useNavigate()
     // console.log(params.id)
     const [dataLoad,setdataLoad] = useState()
 
     const getCategoryProduct = async() =>{
         // console.log(params.id)
-        let res = await axios.get(`http://localhost:8084/products/cloth-product/get-categorywise-cproduct/?subcategory-id=${params.id}`)
+        let res = await axios.get(`http://localhost:8080/products/cloth-product/user/get-categorywise-cproduct/?subcategory-id=${params.id}`)
         // console.log(res)
         data =  res.data
         // console.log(data)
@@ -89,16 +91,18 @@ export const MainProduct = () => {
         getCategoryProduct()
     }, [ getCategoryProduct]);
 
-    const ShowDetail = () =>
+    const ShowDetail = (id) =>
     {
-      console.log("hello")
+      // console.log("hello")
+      navigate(`/detail/${id}`)
+
     }
   return (
     <Container>
     {dataLoad?.map((item) => ( <Wrapper>
      <Card key={item.product.id} >
        <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail()}/>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail(item.product.id)}/>
          </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>

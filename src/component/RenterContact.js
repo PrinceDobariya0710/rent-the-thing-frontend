@@ -32,8 +32,8 @@ const RenterContact = ({item}) => {
         <ContactDetails>
         <summary>Renter Contact</summary>
         <ContactList>
-            <ListItem><H5Text fontSizeH5="0.9em">Primary contact : {item.primaryContact}</H5Text></ListItem>
-            <ListItem><H5Text fontSizeH5="0.9em">Secondary contact : {item.street}</H5Text></ListItem>
+            <ListItem><H5Text fontSizeH5="0.9em">Primary contact : {item[0].primaryContact}</H5Text></ListItem>
+            <ListItem><H5Text fontSizeH5="0.9em">Secondary contact : {item[0].street}</H5Text></ListItem>
         </ContactList>
         </ContactDetails>
     </MainContainer>

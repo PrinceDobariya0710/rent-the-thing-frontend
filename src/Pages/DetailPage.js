@@ -5,8 +5,10 @@ import NavBar from '../component/NavBar';
 import NavBar2 from '../component/NavBar2';
 import ProductDetail2 from '../component/ProductDetail2';
 import Register from '../component/Registration';
+import { useParams } from 'react-router-dom';
 
 export const DetailPage = () => {
+    const params = useParams()
     const [isShowLogin,setIsShowLogin] = useState(false)
     const handleLoginClick = () => {
     if(isShowRegister===false)
@@ -50,7 +52,7 @@ const RegClick = () =>
       <LoginForm isShowLogin={isShowLogin} RegClick={RegClick} handleLoginClick={handleLoginClick}/> 
       <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register>
      <NavBar2></NavBar2>
-     <ProductDetail2></ProductDetail2>
+     <ProductDetail2 id={params.id}></ProductDetail2>
      <Footer></Footer>
   </>
   )

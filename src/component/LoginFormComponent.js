@@ -13,8 +13,9 @@ const Main = styled.main`
     padding:1%;
     position :absolute;
     z-index: 100;
-    top:14%;
-    left:auto;
+    top:17%;
+    left:550px;
+    // margin-left:20%;
     ${mobile({left:"auto"})}
 `;
 const Formbox = styled.form`
@@ -47,7 +48,7 @@ const Text  = styled.text`
 `;
 const Icon = styled.section`
     margin-top: 9px;
-    margin-left:25px;
+    margin-left:45px;
     min-width: 60px;
     position: absolute;
     height:15px;
@@ -110,10 +111,10 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
         roles:{"role_id":2}
     }
 
-        let res =await  axios.post(`http://localhost:8081/api/auth/login`,data)
+        let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
         console.log(res)
         handleLoginClick()
-        sessionStorage.setItem('temp',JSON.stringify(res))
+        localStorage.setItem('renthething',JSON.stringify(res))
     }
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >

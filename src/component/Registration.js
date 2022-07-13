@@ -81,7 +81,7 @@ const Text  = styled.text`
 `;
 const Icon = styled.section`
     margin-top: 13px;
-    margin-left:73px;
+    margin-left:50px;
     min-width: 60px;
     position: absolute;
     height:15px;
