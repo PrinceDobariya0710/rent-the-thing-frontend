@@ -89,7 +89,7 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
   const [Auth,setAuth] = useState(false)
   const AuthFunction = () =>
   {
-    let d = JSON.parse(sessionStorage.getItem('temp'))
+    let d = sessionStorage.getItem('temp')
     console.log(d)
   setAuth(d)
   }

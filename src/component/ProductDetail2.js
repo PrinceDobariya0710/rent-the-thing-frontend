@@ -129,8 +129,9 @@ const ProductDetail2 = ({id}) => {
   const [AddressData,setAddressData]=useState()
   const [ContactData,setContactData]=useState()
   const {isToken} = useContext(LoginContext)
+  console.log(isToken)
   let data
-  let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc2ODI1MTgsImlhdCI6MTY1NzY0NjUxOH0.qEwiV4ozWgpCT_GgbHvI3mCjhnePM6qG2ibh6eiAv2Q"
+  let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc5MDM2NjMsImlhdCI6MTY1Nzg2NzY2M30.qqaITrpYDHytA88QMJUOKwmTmGZSt6Le89FvIRYv4tU"
   const getDetailProduct = async() =>{
     const create = axios.create({
       baseURL: `http://localhost:8080/products/product/product_by_product_id/?product_id=${id}`,

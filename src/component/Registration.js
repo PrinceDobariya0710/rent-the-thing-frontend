@@ -176,6 +176,10 @@ const Register = ({ isShowRegister,LoginClick,handleRegisterClick }) => {
         console.log(res)
         handleRegisterClick()
     }
+    // const GoogleClicked = () =>
+    // {
+    //     http://localhost:8081/login/oauth2/code/google;
+    // }
 
   return (
     <Main className= {`${!isShowRegister ? "active" : ""} show `}>
@@ -207,6 +211,7 @@ const Register = ({ isShowRegister,LoginClick,handleRegisterClick }) => {
                     <br></br>
                     <Text>Already have an account?</Text>
                     <LinkText onClick={LoginClick}>Login here!</LinkText>
+                    {/* <ButtonSubmit onClick={GoogleClicked}>Register with google</ButtonSubmit> */}
             </RegBox>
 
                 {/* {   otpBox && !passwordBox &&

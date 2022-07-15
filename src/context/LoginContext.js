@@ -1,7 +1,26 @@
-import { createContext } from "react";
+import { createContext ,useState} from "react";
+
+const initialState = sessionStorage.getItem('temp')
 
 export const LoginContext = createContext({
-    RentTheThingToken : null
+
 });
 
+export const LoginProvider =({children})=>{
+
+const [isToken,setisToken] = useState(initialState)
+    
+    
+    return(
+    
+    <LoginContext.Provider value={{
+    isToken,setisToken
+    }}>
+    
+    {children}
+    
+    </LoginContext.Provider>
+    
+    );
+}
 // export default LoginContext;

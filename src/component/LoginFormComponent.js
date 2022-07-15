@@ -6,7 +6,7 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import { mobile } from "../Responsive";
 import axios from 'axios';
-import { LoginContext } from "../context/LoginContext";
+import { LoginContext } from '../context/LoginContext';
 
 const Main = styled.main`
     display:flex;
@@ -93,7 +93,7 @@ cursor: pointer;
 
 const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
-    const {setisToken} = useContext(LoginContext)
+    const {isToken,setisToken} = useContext(LoginContext)
     const [state, setState] = useState({
         email:'',
         password:''
@@ -108,16 +108,18 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
     const login = async(e) =>{
         e.preventDefault()
         console.log('login')
-        let data = {    userName: state.email,
+        let data = { userName: state.email,
         password:state.password,
         roles:{"role_id":2}
     }
         let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
         console.log(res.data.token)
+        console.log(JSON.stringify(res.data.token))
         handleLoginClick()
-        setisToken(JSON.stringify(res.data.token))
-        localStorage.setItem('temp',JSON.stringify(res))
+        setisToken(res.data.token)
+        sessionStorage.setItem('temp',res.data.token)
     }
+    console.log(isToken)
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>

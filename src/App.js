@@ -11,14 +11,20 @@ import { CartPage } from './Pages/CartPage';
 import { OrderHistoryPage } from './Pages/OrderHistoryPage';
 import { ProfilePage } from './Pages/ProfilePage';
 import { DetailPage } from './Pages/DetailPage';
-import {LoginContext} from './context/LoginContext';
+// import {LoginContext} from './context/LoginContext';
 import { ManageProductPage } from './Pages/ManageProductPage';
-
+import { NotificationPage } from './Pages/NotificationPage';
+import { createContext } from "react";
+import { LoginProvider } from './context/LoginContext';
+export const MyContext = createContext({
+  RentTheThingToken : null
+});
 function App() {
-  const [isToken,setisToken] = useState()
+  // const [isToken,setisToken] = useState()
+  
   return (
     <div className="App">
-      <LoginContext.Provider value={{isToken,setisToken}}>
+      <LoginProvider>
       <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
@@ -28,10 +34,11 @@ function App() {
         <Route path='/profile' element={<ProfilePage/>}/>
         <Route path='/detail/:id' element={<DetailPage/>}/>
         <Route path='/inventory' element={<ManageProductPage/>}/>
+        <Route path='/notification' element={<NotificationPage/>}/>
         
       </Routes>
       </BrowserRouter>
-      </LoginContext.Provider>
+      </LoginProvider>
     </div>
   );
 }

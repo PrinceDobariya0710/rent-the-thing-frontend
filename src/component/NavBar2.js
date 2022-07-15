@@ -109,7 +109,7 @@ useEffect(() => {
               console.log(dropdownstate)
             }}>All Categories<KeyboardArrowDownIcon></KeyboardArrowDownIcon></MenuItem> <Dropdown display={dropdownstate}/>
             <NavLink to="/order">My Orders</NavLink>
-            <NavLink to="/">Notifications</NavLink>
+            <NavLink to="/notification">Notifications</NavLink>
             <NavLink to="/inventory">Product Inventory</NavLink>
         </Wrapper>
     </Container>

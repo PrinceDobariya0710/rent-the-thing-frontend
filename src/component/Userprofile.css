@@ -1,0 +1,38 @@
+.usermain
+{
+    display: flex;
+}
+.detailcontainer
+{
+    margin-left: 10%;
+    width:80%;
+}
+.detail
+{
+    display: flex;
+    padding:10%;
+}
+.userform
+{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.userdetail
+{
+    /* margin-left: 2%; */
+    text-align: start;
+}
+.navigationcontainer
+{
+    /* width:10% */
+}
+.inputbox
+{
+    width: 20vw;
+    padding: 1.5%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+    text-align: start;
+}
