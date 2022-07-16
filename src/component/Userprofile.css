@@ -6,11 +6,7 @@
 {
     margin-left: 10%;
     width:80%;
-}
-.detail
-{
     display: flex;
-    padding:10%;
 }
 .userform
 {
@@ -27,12 +23,12 @@
 }
 .inputbox
 {
-    width: 20vw;
+    width: 17vw;
     padding: 1.5%;
     margin: 8px 0;
     display: inline-block;
     border: 0;
     border-bottom: 1px solid #ccc;
+    outline: none;
     background: transparent;
-    text-align: start;
 }
