@@ -4,7 +4,7 @@ import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
 
 export const UserProfile = () => {
-  const {isToken} = useContext(LoginContext)
+  const {isToken,userid,setuserid} = useContext(LoginContext)
 
   const [state, setState] = useState(
     {
@@ -20,9 +20,11 @@ export const UserProfile = () => {
       [e.target.name]: e.target.value
     }))
   }
+  console.log(isToken)
+  console.log(userid) 
   const addData = async (e) => {
     e.preventDefault()
-    console.log("added")
+    // console.log("added")
     let detail = {
       firstName: state.firstName,
       lastName: state.lastName,
@@ -37,8 +39,21 @@ export const UserProfile = () => {
     });
 
     let res = await create.post(``,detail)
-    console.log(res.data)
+    console.log(res.data.userDetailsId)
+    setuserid(res.data.userDetailsId)
   }
+  const getuserid = (id) =>
+  {
+
+        const create = axios.create({
+            baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
+            timeout: 1000*60*60,
+            headers: {'Authorization': 'Bearer '+isToken}
+          });
+          let res = create.get(``)
+          console.log(res.data)
+          setuserid(res.data)
+    }
   return (
     <main className='usermain'>
       <section className='detailcontainer'>

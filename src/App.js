@@ -16,9 +16,7 @@ import { ManageProductPage } from './Pages/ManageProductPage';
 import { NotificationPage } from './Pages/NotificationPage';
 import { createContext } from "react";
 import { LoginProvider } from './context/LoginContext';
-export const MyContext = createContext({
-  RentTheThingToken : null
-});
+
 function App() {
   // const [isToken,setisToken] = useState()
   
@@ -35,7 +33,6 @@ function App() {
         <Route path='/detail/:id' element={<DetailPage/>}/>
         <Route path='/inventory' element={<ManageProductPage/>}/>
         <Route path='/notification' element={<NotificationPage/>}/>
-        
       </Routes>
       </BrowserRouter>
       </LoginProvider>

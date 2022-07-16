@@ -129,9 +129,10 @@ const ProductDetail2 = ({id}) => {
   const [AddressData,setAddressData]=useState()
   const [ContactData,setContactData]=useState()
   const {isToken} = useContext(LoginContext)
-  console.log(isToken)
+  const {userid} = useContext(LoginContext)
+  // console.log(isToken)
   let data
-  let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc5MDM2NjMsImlhdCI6MTY1Nzg2NzY2M30.qqaITrpYDHytA88QMJUOKwmTmGZSt6Le89FvIRYv4tU"
+  // let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc5MDM2NjMsImlhdCI6MTY1Nzg2NzY2M30.qqaITrpYDHytA88QMJUOKwmTmGZSt6Le89FvIRYv4tU"
   const getDetailProduct = async() =>{
     const create = axios.create({
       baseURL: `http://localhost:8080/products/product/product_by_product_id/?product_id=${id}`,
@@ -145,9 +146,52 @@ const ProductDetail2 = ({id}) => {
     setAddressData(data.userDetails.address.data)
     setContactData(data.userDetails.contact.data)
   }
+  let price = DetailData?.clothingProducts.product.value_duration
+  const [state, setState] = useState(
+    {
+      userDetails:{userDetailsId:''},
+      product:{id:''},
+      issuedDate:'',
+      returnDate:'',
+      quantity:'',
+      totalPay:'',
+      ratings:''
+    })
+  const handleChange = (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value
+    }))
+  }
+  const AddOrder = async(e) =>
+  {
+    e.preventDefault()
+    let data = {
+      userDetails:{userDetailsId:Number(userid)},
+      product:{id:DetailData.clothingProducts.product.id},
+      orderType:{orderTypeId:1},
+      orderStatus:{id:1},
+      issuedDate:state.issuedDate,
+      returnDate:state.returnDate,
+      quantity:Number(state.quantity),
+      totalPay:price * state.quantity,
+      ratings:''
+    }
+    console.log(data)
+    const create = axios.create({
+      baseURL: `http://localhost:8080/orders/order/create/`,
+      timeout: 1000*60*60,
+      headers: {'Authorization': 'Bearer '+isToken}
+    });
+
+    let res = await create.post(``,data)
+    console.log(res.data)
+
+  }
   useEffect(() => {
     getDetailProduct()
   },[] );
+  
   return (
 
     <Wrapper>
@@ -155,7 +199,7 @@ const ProductDetail2 = ({id}) => {
     <MainContainer>
         <RightContainer>
             <ProductHeaderContainer>
-                <HeaderText fontWeight="600" fontAlign="left">{DetailData?.clothingProducts.product.productName} 
+                <HeaderText fontWeight="600" fontAlign="left" >{DetailData?.clothingProducts.product.productName} 
                 {/* <AddToCartButton>ADD TO CART</AddToCartButton> */}
                   <H5Text fontSizeH5="1.1rem" fontWeightH5="400">({DetailData?.clothingProducts.product.subcategory.cateGory.category_name} - {DetailData?.clothingProducts.product.subcategory.subCategory_name})</H5Text>
                 </HeaderText>
@@ -184,8 +228,10 @@ const ProductDetail2 = ({id}) => {
                   <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Product Price : {DetailData?.clothingProducts.product.product_rate}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
                   <ListItem><H5Text fontSizeH5="1.1rem" fontAlignH5="left">Deposite : {DetailData?.clothingProducts.product.deposit}<CurrencyRupee fontSize='small'/></H5Text></ListItem>
                 </AboutProductList>
-                Date: <input type="date" /> 
-                <AddToCartButton >ADD TO CART</AddToCartButton>
+                Issue Date: <input type="date" name="issuedDate" value={state.issuedDate} onChange={handleChange}/> <br></br>
+                return Date: <input type="date" name="returnDate" value={state.returnDate} onChange={handleChange}/><br></br>
+                Quantity : <input type="number" name="quantity" value={state.quantity} onChange={handleChange}/><br></br>
+                <AddToCartButton onClick={AddOrder} >ADD TO CART</AddToCartButton>
               </ListItem>
               <ListItem><H5Text fontSizeH5="1.0em">Renter info :</H5Text>
               <hr/>

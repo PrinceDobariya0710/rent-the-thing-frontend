@@ -94,6 +94,7 @@ cursor: pointer;
 const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
     const {isToken,setisToken} = useContext(LoginContext)
+    const {userid,setuserid} = useContext(LoginContext)
     const [state, setState] = useState({
         email:'',
         password:''
@@ -114,12 +115,28 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
     }
         let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
         console.log(res.data.token)
+        console.log(res.data.userId)
         console.log(JSON.stringify(res.data.token))
         handleLoginClick()
         setisToken(res.data.token)
+        setuserid(res.data.userId)
         sessionStorage.setItem('temp',res.data.token)
+        sessionStorage.setItem('userid',res.data.userId)
+        // getuserid(Number(res.data.userId))
     }
-    console.log(isToken)
+    // const getuserid = (id) =>
+    // {
+    //     console.log(isToken)
+    //     const create = axios.create({
+    //         baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
+    //         timeout: 1000*60*60,
+    //         headers: {'Authorization': 'Bearer '+isToken}
+    //       });
+    //       let res = create.get(``)
+    //       console.log(res.data)
+    // }
+    // console.log(isToken)
+    // console.log(userid)
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>
