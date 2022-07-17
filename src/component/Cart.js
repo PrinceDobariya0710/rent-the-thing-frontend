@@ -41,7 +41,8 @@ export const Cart = () => {
             {/* {item.attribute.attributeTitle}: {item.attributeValue}<br></br> */}
             Duration: {item.product.productDurationRates.duration} <br></br>
             Price: {item.product.value_duration}<br></br>
-            Seller: {item.product.userDetailsId.firstName} {item.product.userDetailsId.lastName}
+            Seller: {item.product.userDetailsId.firstName} {item.product.userDetailsId.lastName}<br></br>
+            <button className='confirm'>Confirm</button>
         </section>
         <section className='c3'>
             <CloseIcon></CloseIcon>

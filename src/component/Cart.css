@@ -43,3 +43,9 @@ hr
 {
     width: 100%;
 }
+.confirm {
+    background-color: #f0d9bc;
+    color: black;
+    border: none;
+    margin-top: 3%;
+}
