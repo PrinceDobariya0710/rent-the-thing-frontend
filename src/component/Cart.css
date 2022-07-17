@@ -11,6 +11,7 @@
 {
     display: flex;
     margin:15px;
+    align-items: flex-start;
     border:1px solid rgb(187, 187, 187);
 }
 .c1{

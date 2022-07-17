@@ -1,4 +1,5 @@
 import React ,{useState,useContext} from "react";
+import {useNavigate} from 'react-router-dom';
 import './componentstyle.css';
 import Home from "./Home";
 import styled from "styled-components";
@@ -95,10 +96,12 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
     const {isToken,setisToken} = useContext(LoginContext)
     const {userid,setuserid} = useContext(LoginContext)
+    const {userdetailId,setuserdetailId} = useContext(LoginContext)
     const [state, setState] = useState({
         email:'',
         password:''
     })
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setState((prevState)=>({
@@ -108,7 +111,6 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
     }
     const login = async(e) =>{
         e.preventDefault()
-        console.log('login')
         let data = { userName: state.email,
         password:state.password,
         roles:{"role_id":2}
@@ -116,27 +118,36 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
         let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
         console.log(res.data.token)
         console.log(res.data.userId)
-        console.log(JSON.stringify(res.data.token))
         handleLoginClick()
         setisToken(res.data.token)
         setuserid(res.data.userId)
         sessionStorage.setItem('temp',res.data.token)
         sessionStorage.setItem('userid',res.data.userId)
-        // getuserid(Number(res.data.userId))
+        getuserid(Number(res.data.userId),res.data.token)
     }
-    // const getuserid = (id) =>
-    // {
-    //     console.log(isToken)
-    //     const create = axios.create({
-    //         baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
-    //         timeout: 1000*60*60,
-    //         headers: {'Authorization': 'Bearer '+isToken}
-    //       });
-    //       let res = create.get(``)
-    //       console.log(res.data)
-    // }
-    // console.log(isToken)
-    // console.log(userid)
+    const getuserid = async (id,token) =>
+    {
+        // console.log("id-----------",id)
+        // console.log("token----------",token)
+        const create = axios.create({
+            baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
+            timeout: 1000*60*60,
+            headers: {'Authorization': 'Bearer '+token}
+          });
+          let res = await create.get(``)
+          console.log(res.data.data)
+          console.log(res.data.data.userDetailsId)
+          if(!res.data.data)
+          {
+            alert("please fill your details")
+            navigate('/profile')
+
+          }else{
+                setuserdetailId(res.data.data.userDetailsId)
+                sessionStorage.setItem('userdetail',res.data.data.userDetailsId)
+          }
+    }
+
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>

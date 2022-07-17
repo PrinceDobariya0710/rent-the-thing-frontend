@@ -9,6 +9,7 @@ import RenterContact from './RenterContact';
 import axios from 'axios';
 import { useState,useEffect } from "react";
 import { LoginContext } from '../context/LoginContext';
+import {useNavigate} from 'react-router-dom';
 
 const Wrapper = styled.article`
 
@@ -128,9 +129,9 @@ const ProductDetail2 = ({id}) => {
   const [DetailData,setDetailData]=useState()
   const [AddressData,setAddressData]=useState()
   const [ContactData,setContactData]=useState()
-  const {isToken} = useContext(LoginContext)
-  const {userid} = useContext(LoginContext)
-  // console.log(isToken)
+  const {isToken, userid, userdetailId} = useContext(LoginContext)
+  const navigate = useNavigate();
+  console.log(userdetailId);
   let data
   // let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc5MDM2NjMsImlhdCI6MTY1Nzg2NzY2M30.qqaITrpYDHytA88QMJUOKwmTmGZSt6Le89FvIRYv4tU"
   const getDetailProduct = async() =>{
@@ -167,7 +168,7 @@ const ProductDetail2 = ({id}) => {
   {
     e.preventDefault()
     let data = {
-      userDetails:{userDetailsId:Number(userid)},
+      userDetails:{userDetailsId:Number(userdetailId)},
       product:{id:DetailData.clothingProducts.product.id},
       orderType:{orderTypeId:1},
       orderStatus:{id:1},
@@ -186,7 +187,7 @@ const ProductDetail2 = ({id}) => {
 
     let res = await create.post(``,data)
     console.log(res.data)
-
+    navigate('/cart')
   }
   useEffect(() => {
     getDetailProduct()

@@ -2,10 +2,11 @@ import React, { useState, useContext } from 'react';
 import './Userprofile.css';
 import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
+import {useNavigate} from 'react-router-dom';
 
 export const UserProfile = () => {
   const {isToken,userid,setuserid} = useContext(LoginContext)
-
+  const {userdetailId,setuserdetailId} = useContext(LoginContext)
   const [state, setState] = useState(
     {
       firstName: '',
@@ -14,6 +15,7 @@ export const UserProfile = () => {
       website: '',
       dob: ''
     })
+    const navigate = useNavigate();
   const handleChange = (e) => {
     setState((prevState) => ({
       ...prevState,
@@ -40,20 +42,12 @@ export const UserProfile = () => {
 
     let res = await create.post(``,detail)
     console.log(res.data.userDetailsId)
-    setuserid(res.data.userDetailsId)
+    // setuserid(res.data.userDetailsId)
+    setuserdetailId(res.data.userDetailsId)
+    alert("successfully added your detail")
+    navigate('/')
   }
-  const getuserid = (id) =>
-  {
-
-        const create = axios.create({
-            baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
-            timeout: 1000*60*60,
-            headers: {'Authorization': 'Bearer '+isToken}
-          });
-          let res = create.get(``)
-          console.log(res.data)
-          setuserid(res.data)
-    }
+  
   return (
     <main className='usermain'>
       <section className='detailcontainer'>
