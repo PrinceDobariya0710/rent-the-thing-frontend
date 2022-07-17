@@ -24,7 +24,11 @@ export const Cart = () => {
     console.log(res.data)
     setrentdata(res.data)
   }
-  useEffect(() => {
+  const confirmOrder = () =>
+  {
+      
+  }
+   useEffect(() => {
     getCartProduct()
   },[] );
 
@@ -42,7 +46,7 @@ export const Cart = () => {
             Duration: {item.product.productDurationRates.duration} <br></br>
             Price: {item.product.value_duration}<br></br>
             Seller: {item.product.userDetailsId.firstName} {item.product.userDetailsId.lastName}<br></br>
-            <button className='confirm'>Confirm</button>
+            <button className='confirm' onClick={confirmOrder}>Confirm</button>
         </section>
         <section className='c3'>
             <CloseIcon></CloseIcon>
