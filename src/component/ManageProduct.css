@@ -1,0 +1,51 @@
+.mainpr
+{
+    display:flex;
+    justify-content: center;
+    margin:5% auto;
+    width:100%;
+}
+.maincontainer
+{
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    padding:2%;
+    width:70%;
+}
+.containerpr
+{
+    /* padding:4%;          */
+    display: flex;
+}
+.form1
+{
+    text-align: start;
+  
+}
+.inputbox
+{
+    width: 20vw;
+    padding: 1.5%;
+    margin: 8px 0;
+    display: inline-block;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    background: transparent;
+    text-align: start;
+}
+.data
+{
+    width:50%;
+    margin-left: 5%;
+}
+.uploadimage
+{
+    width:50%;
+}
+hr{
+    width:100%;
+}
+.btn
+{
+    margin-left: 5%;
+    /* padding: 5%; */
+}

@@ -3,7 +3,8 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import React,{useState} from "react";
 import styled from "styled-components";
-import { mobile } from "../Responsive";
+import { mobile,tablet } from "../Responsive";
+import { Link } from "react-router-dom";
 
 const Container = styled.div`
   height: 3%;
@@ -18,7 +19,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  
+  ${tablet({ })}
   ${mobile({ })}
 `;
 
@@ -43,9 +44,16 @@ const Input = styled.input`
 `;
 
 
-const Logo = styled.h1`
+const Logo = styled(Link)`
   font-weight: bold;
+  color:black;
+  text-decoration:none;
+  font-size:3rem;
+  ${tablet({ fontSize: "20px" })}
   ${mobile({ fontSize: "18px" })}
+  &:hover{
+    color:black;
+  }
 `;
 const Right = styled.div`
   flex: 1;
@@ -60,7 +68,20 @@ const MenuItem = styled.section`
   cursor: pointer;
   margin-left: 25px;
   padding: 5%;
+  ${tablet({ fontSize: "14px" })}
   ${mobile({ fontSize: "10px", marginLeft: "8px" })}
+`;
+
+const MenuLink = styled(Link)
+`
+font-size: 14px;
+cursor: pointer;
+margin-left: 25px;
+padding: 5%;
+color:black;
+${tablet({ fontSize: "14px" })}
+${mobile({ fontSize: "10px", marginLeft: "8px" })}
+
 `;
 // ${mobile({ fontSize: "8px", marginLeft: "8px" })}
 const NavBar = ({handleLoginClick,handleRegisterClick})=>
@@ -68,7 +89,7 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
   const [Auth,setAuth] = useState(false)
   const AuthFunction = () =>
   {
-    let d = JSON.parse(sessionStorage.getItem('temp'))
+    let d = sessionStorage.getItem('temp')
     console.log(d)
   setAuth(d)
   }
@@ -84,7 +105,7 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
       <Container>
         <Wrapper>
           <Left>
-            <Logo>RentTheThing</Logo>
+            <Logo to="/">RentTheThing</Logo>
             <SearchContainer>
                 <Input placeholder="Search" />
                 <SearchIcon style={{ color: "gray", fontSize: 14, width: 20, height: 20 }} />
@@ -99,11 +120,11 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
                 <MenuItem onClick={handleLoginClick}>SIGN IN</MenuItem>
                 </>
             }
-            <MenuItem>
+            <MenuLink to="/cart">
               <Badge badgeContent={4} color="primary">
                 <ShoppingCartIcon />
               </Badge>
-            </MenuItem>
+            </MenuLink>
           </Right>
         </Wrapper>
       </Container>

@@ -1,4 +1,5 @@
-import React ,{useState} from "react";
+import React ,{useState,useContext} from "react";
+import {useNavigate} from 'react-router-dom';
 import './componentstyle.css';
 import Home from "./Home";
 import styled from "styled-components";
@@ -6,6 +7,7 @@ import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import { mobile } from "../Responsive";
 import axios from 'axios';
+import { LoginContext } from '../context/LoginContext';
 
 const Main = styled.main`
     display:flex;
@@ -13,8 +15,9 @@ const Main = styled.main`
     padding:1%;
     position :absolute;
     z-index: 100;
-    top:14%;
-    left:auto;
+    top:17%;
+    left:550px;
+    // margin-left:20%;
     ${mobile({left:"auto"})}
 `;
 const Formbox = styled.form`
@@ -47,7 +50,7 @@ const Text  = styled.text`
 `;
 const Icon = styled.section`
     margin-top: 9px;
-    margin-left:25px;
+    margin-left:45px;
     min-width: 60px;
     position: absolute;
     height:15px;
@@ -91,10 +94,14 @@ cursor: pointer;
 
 const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
+    const {isToken,setisToken} = useContext(LoginContext)
+    const {userid,setuserid} = useContext(LoginContext)
+    const {userdetailId,setuserdetailId} = useContext(LoginContext)
     const [state, setState] = useState({
         email:'',
         password:''
     })
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setState((prevState)=>({
@@ -104,17 +111,43 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
     }
     const login = async(e) =>{
         e.preventDefault()
-        console.log('login')
-        let data = {    userName: state.email,
+        let data = { userName: state.email,
         password:state.password,
         roles:{"role_id":2}
     }
-
-        let res =await  axios.post(`http://localhost:8081/api/auth/login`,data)
-        console.log(res)
+        let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
+        console.log(res.data.token)
+        console.log(res.data.userId)
         handleLoginClick()
-        sessionStorage.setItem('temp',JSON.stringify(res))
+        setisToken(res.data.token)
+        setuserid(res.data.userId)
+        sessionStorage.setItem('temp',res.data.token)
+        sessionStorage.setItem('userid',res.data.userId)
+        getuserid(Number(res.data.userId),res.data.token)
     }
+    const getuserid = async (id,token) =>
+    {
+        // console.log("id-----------",id)
+        // console.log("token----------",token)
+        const create = axios.create({
+            baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
+            timeout: 1000*60*60,
+            headers: {'Authorization': 'Bearer '+token}
+          });
+          let res = await create.get(``)
+          console.log(res.data.data)
+          console.log(res.data.data.userDetailsId)
+          if(!res.data.data)
+          {
+            alert("please fill your details")
+            navigate('/profile')
+
+          }else{
+                setuserdetailId(res.data.data.userDetailsId)
+                sessionStorage.setItem('userdetail',res.data.data.userDetailsId)
+          }
+    }
+
     return(
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>

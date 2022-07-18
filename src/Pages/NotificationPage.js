@@ -1,20 +1,14 @@
-
 import React,{useState} from 'react';
-import { Navbar } from 'react-bootstrap';
 import Footer from '../component/Footer';
-import HomeProducts from '../component/HomeProducts';
 import LoginForm from '../component/LoginFormComponent';
+import { ManageProduct } from '../component/ManageProduct';
 import NavBar from '../component/NavBar';
 import NavBar2 from '../component/NavBar2';
-import RegisterFormComponent from '../component/RegisterFormComponent';
+import { Notification } from '../component/Notification';
 import Register from '../component/Registration';
-import Slider from '../component/Slider';
-import ProductDetailPage from './ProductDetailPage';
-import axios from 'axios';
 
-export const HomePage = () => {
-
-  const [isShowLogin,setIsShowLogin] = useState(false)
+export const NotificationPage = () => {
+    const [isShowLogin,setIsShowLogin] = useState(false)
     const handleLoginClick = () => {
     if(isShowRegister===false)
     {
@@ -51,35 +45,14 @@ const RegClick = () =>
    }
   
 }
-// const api = axios.create({
-//   baseURL: 'http://localhost:5001/',
-//  });
-
-// const [products, setProducts] = useState([]);
-
-// React.useEffect(() => {
-//   api.get('/getall')
-//   .then(res=>{console.log(res.data)
-//     setProducts(res.data)})
-//     .catch(error=>{console.log(error)})
-// }, []);
-// console.log(products)
-// if (!products) return null;
-// console.log(products)
-
-
   return (
-      <>
-      <NavBar handleLoginClick={handleLoginClick} handleRegisterClick={handleRegisterClick}></NavBar>
+    <>
+    <NavBar handleLoginClick={handleLoginClick} handleRegisterClick={handleRegisterClick}></NavBar>
       <LoginForm isShowLogin={isShowLogin} RegClick={RegClick} handleLoginClick={handleLoginClick}/> 
-      {/* <RegisterFormComponent isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></RegisterFormComponent> */}
       <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register>
-     <NavBar2 get></NavBar2>
-     <Slider></Slider>
-     <HomeProducts></HomeProducts>
+     <NavBar2></NavBar2>
+     <Notification></Notification>
      <Footer></Footer>
-      </>
+  </>
   )
 }
-
-export default HomePage

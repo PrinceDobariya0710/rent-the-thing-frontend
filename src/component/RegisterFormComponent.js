@@ -4,7 +4,6 @@ import './componentstyle.css';
 import Home from "./Home";
 import { mobile } from "../Responsive";
 import styled from "styled-components";
-
 import EmailIcon from '@mui/icons-material/Email';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import axios from 'axios';
@@ -161,14 +160,14 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
     const getOtp = async() =>{
         setOtpBox(true)
         console.log(state.email);
-        let res =await  axios.post(`http://localhost:8081/api/auth/send-otp/?email=${state.email}`)
+        let res =await  axios.post(`http://localhost:8081/auth-service/verification/send-otp/?email=${state.email}`)
         console.log(res)
     }
     const getPassword = async() =>{
         setOtpBox(false)
         setPasswordBox(true)
         let otp = Number(state.OTP)
-        let res =await  axios.post(`http://localhost:8081/api/auth/verify-otp/?OTP=${otp}`)
+        let res =await  axios.post(`http://localhost:8081/auth-service/verification/verify-otp/?OTP=${otp}`)
         console.log(res)
     }
     const register = () =>{
@@ -237,7 +236,5 @@ const RegisterFormComponent = ({ isShowRegister,LoginClick }) => {
 </Main>
   )
 }
-
-
 
 export default RegisterFormComponent
