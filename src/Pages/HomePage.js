@@ -74,7 +74,7 @@ const RegClick = () =>
       <LoginForm isShowLogin={isShowLogin} RegClick={RegClick} handleLoginClick={handleLoginClick}/> 
       {/* <RegisterFormComponent isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></RegisterFormComponent> */}
       <Register isShowRegister={isShowRegister} LoginClick={LoginClick} handleRegisterClick={handleRegisterClick}></Register>
-     <NavBar2></NavBar2>
+     <NavBar2 get></NavBar2>
      <Slider></Slider>
      <HomeProducts></HomeProducts>
      <Footer></Footer>

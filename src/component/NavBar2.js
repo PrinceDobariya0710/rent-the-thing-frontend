@@ -104,6 +104,7 @@ useEffect(() => {
   return (
     <Container>
         <Wrapper>
+
             <MenuItem onClick={()=>{
               setDropdownstate(prevState=>!prevState)
               console.log(dropdownstate)
@@ -111,6 +112,7 @@ useEffect(() => {
             <NavLink to="/order">My Orders</NavLink>
             <NavLink to="/notification">Notifications</NavLink>
             <NavLink to="/inventory">Product Inventory</NavLink>
+
         </Wrapper>
     </Container>
   )
