@@ -24,9 +24,16 @@ export const Cart = () => {
     console.log(res.data)
     setrentdata(res.data)
   }
-  const confirmOrder = () =>
+  const confirmOrder = async(id) =>
   {
-      
+    const create = axios.create({
+      baseURL: `http://localhost:8080/orders/order/changestatus/6/${id}`,
+      timeout: 1000*60*60,
+      headers: {'Authorization': 'Bearer '+isToken}
+    });
+    let res = await create.put(``)
+    // getCartProduct()
+    console.log(res.data)
   }
    useEffect(() => {
     getCartProduct()
@@ -46,7 +53,7 @@ export const Cart = () => {
             Duration: {item.product.productDurationRates.duration} <br></br>
             Price: {item.product.value_duration}<br></br>
             Seller: {item.product.userDetailsId.firstName} {item.product.userDetailsId.lastName}<br></br>
-            <button className='confirm' onClick={confirmOrder}>Confirm</button>
+            <button className='confirm' onClick={()=>confirmOrder(Number(item.orderId))}>Confirm</button>
         </section>
         <section className='c3'>
             <CloseIcon></CloseIcon>

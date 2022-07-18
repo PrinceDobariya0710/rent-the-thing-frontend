@@ -1,16 +1,16 @@
 .usermain
 {
     display: flex;
+    width: 100%;
 }
 .detailcontainer
 {
-    margin-left: 10%;
-    width:80%;
+    margin: 5% auto;
     display: flex;
 }
 .userform
 {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
 }
 .userdetail
 {
@@ -31,4 +31,9 @@
     border-bottom: 1px solid #ccc;
     outline: none;
     background: transparent;
+}
+.addDetail {
+    margin-top: 5%;
+    background-color: #f0d9bc;
+    color:black;
 }

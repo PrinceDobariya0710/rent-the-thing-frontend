@@ -1,18 +1,40 @@
-import React from 'react';
+import React,{useEffect,useContext,useState} from 'react';
 import "./OrderHistory.css";
 import { Product, products } from '../data';
+import axios from 'axios';
+import { LoginContext } from '../context/LoginContext';
+
 export const OrderHistory = () => {
+  let data;
+  const [getdata,setgetdata] = useState([])
+  const {isToken, userid, userdetailId} = useContext(LoginContext)
+  const getCategoryProduct = async() =>{
+    // console.log(params.id)
+    const create = axios.create({
+      baseURL: `http://localhost:8080/orders/order/get/user_history/${userdetailId}`,
+      timeout: 1000*60*60,
+      headers: {'Authorization': 'Bearer '+isToken}
+    });
+    let res =  await create.get(``)
+    data =  res.data
+    console.log(data)
+    setgetdata(data)
+  }
+  useEffect(() => {
+    getCategoryProduct()
+}, []);
+
   return (
     <main className='ordermain'>
         <section className='producthmain'>
-        {Product.map((item)=>(
+        {getdata.map((item)=>(
         <section className='producthcontainer'>
         <section className='column1'>
-          <img src={item.product.product_image} height="150px" width="150px"/>
+          <img src={`/ecommerce-photos/${item.product.product_image}`} height="150px" width="150px"/>
         </section>
         <section className='column2'>
             Product Name: {item.product.productName}<br></br>
-            {item.attribute.attributeTitle}: {item.attributeValue}<br></br>
+            {/* {item.attribute.attributeTitle}: {item.attributeValue}<br></br> */}
             Duration: {item.product.productDurationRates.duration} <br></br>
             Price: {item.product.value_duration}<br></br>
             Seller: {item.product.userDetailsId.firstName} {item.product.userDetailsId.lastName}

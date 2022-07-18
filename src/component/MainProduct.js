@@ -1,9 +1,9 @@
-import React,{useState,useEffect, Component} from 'react';
+import React,{useState,useEffect, useContext} from 'react';
 import styled from "styled-components";
 import { mobile ,tablet} from "../Responsive";
 import axios from 'axios';
 import { useParams,useNavigate } from 'react-router-dom';
-
+import { LoginContext } from '../context/LoginContext';
 
 const Container = styled.header`
   padding-left:6%;
@@ -77,11 +77,18 @@ export const MainProduct = () => {
     const navigate = useNavigate()
     // console.log(params.id)
     const [dataLoad,setdataLoad] = useState()
-
+  
+    const {isToken, userid, userdetailId} = useContext(LoginContext)
     const getCategoryProduct = async() =>{
         // console.log(params.id)
-        let res = await axios.get(`http://localhost:8080/products/cloth-product/user/get-categorywise-cproduct/?subcategory-id=${params.id}`)
+        const create = axios.create({
+          baseURL: `http://localhost:8080/products/cloth-product/user/get-categorywise-cproduct/?subcategory-id=${params.id}`,
+          timeout: 1000*60*60,
+          headers: {'Authorization': 'Bearer '+isToken}
+        });
+        // let res = await axios.get(`http://localhost:8080/products/cloth-product/user/get-categorywise-cproduct/?subcategory-id=${params.id}`)
         // console.log(res)
+        let res =  await create.get(``)
         data =  res.data
         // console.log(data)
         setdataLoad(data)
@@ -89,7 +96,7 @@ export const MainProduct = () => {
       
       useEffect(() => {
         getCategoryProduct()
-    }, [ getCategoryProduct]);
+    }, []);
 
     const ShowDetail = (id) =>
     {

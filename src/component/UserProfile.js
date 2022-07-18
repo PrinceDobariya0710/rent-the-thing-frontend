@@ -63,7 +63,7 @@ export const UserProfile = () => {
               <input type="text" className='inputbox' name='website' value={state.website} onChange={handleChange} /><br></br>
               <label>BirthDate : </label>
               <input type="date" className='inputbox' name='dob' value={state.dob} onChange={handleChange} /><br></br>
-              <input type="submit" value="AddDetail" onClick={addData} />
+              <input type="submit" value="AddDetail" className='addDetail' onClick={addData} />
             </form>
           </section>
           <section className='navigationcontainer'>
