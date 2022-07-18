@@ -13,6 +13,7 @@
 {
     display: flex;
     margin:15px;
+
     border:1px solid rgb(187, 187, 187);
 }
 .c1{
@@ -27,12 +28,14 @@
 .c3{
     width:30%;
     display: flex;
+    align-self: center;
     flex-direction: column;
     justify-content: space-evenly;
 
 }
 .c3 button{
     width: 200px;
+    margin-right:4%;
 }
 .confirm {
     background-color: green;
