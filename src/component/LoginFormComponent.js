@@ -1,5 +1,5 @@
-import React ,{useState,useContext} from "react";
-import {useNavigate} from 'react-router-dom';
+import React, { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import './componentstyle.css';
 import Home from "./Home";
 import styled from "styled-components";
@@ -18,7 +18,7 @@ const Main = styled.main`
     top:17%;
     left:550px;
     // margin-left:20%;
-    ${mobile({left:"auto"})}
+    ${mobile({ left: "auto" })}
 `;
 const Formbox = styled.form`
     opacity: 1;
@@ -31,7 +31,7 @@ const Formbox = styled.form`
     letter-spacing: 2px;
     word-spacing: 5px;
     box-shadow: 2px 2px 5px gray;
-    ${mobile({ height: "40vh" ,width:"65vw"})}
+    ${mobile({ height: "40vh", width: "65vw" })}
 
 `;
 const LoginText = styled.title`
@@ -42,9 +42,9 @@ const LoginText = styled.title`
     font-family:Copperplate Gothic Light;
     font-size:200%;  
     font-Weight:40%;
-    ${mobile({ fontSize:"30px"})}
+    ${mobile({ fontSize: "30px" })}
 `;
-const Text  = styled.text`
+const Text = styled.text`
 
 
 `;
@@ -54,7 +54,7 @@ const Icon = styled.section`
     min-width: 60px;
     position: absolute;
     height:15px;
-    ${mobile({ marginLeft:"10px",marginTop:"7px",fontSize:"10px"})}
+    ${mobile({ marginLeft: "10px", marginTop: "7px", fontSize: "10px" })}
 `;
 
 const InputBox = styled.input`
@@ -67,7 +67,7 @@ border-bottom: 1px solid #ccc;
 padding-left: 10%;
 outline: none;
 background: transparent;
-${mobile({ fontSize:"12px",width:"180px"})}
+${mobile({ fontSize: "12px", width: "180px" })}
 `;
 
 const ButtonSubmit = styled.button`
@@ -83,84 +83,94 @@ margin: 4px 2px;
 cursor: pointer;
 border-radius: 30px;
 width:18vw;
-${mobile({ fontSize:"12px",width:"180px"})}
+${mobile({ fontSize: "12px", width: "180px" })}
 `;
 
 const LinkText = styled.text`
 cursor: pointer;
       color: #295e81;
-      ${mobile({ fontSize:"12px"})}
+      ${mobile({ fontSize: "12px" })}
 `;
 
-const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
-{
-    const {isToken,setisToken} = useContext(LoginContext)
-    const {userid,setuserid} = useContext(LoginContext)
-    const {userdetailId,setuserdetailId} = useContext(LoginContext)
+const LoginForm = ({ isShowLogin, RegClick, handleLoginClick }) => {
+    const { isToken, setisToken } = useContext(LoginContext)
+    const { userid, setuserid } = useContext(LoginContext)
+    const { userdetailId, setuserdetailId } = useContext(LoginContext)
     const [state, setState] = useState({
-        email:'',
-        password:''
+        email: '',
+        password: ''
     })
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setState((prevState)=>({
+        setState((prevState) => ({
             ...prevState,
             [e.target.name]: e.target.value
         }))
     }
-    const login = async(e) =>{
-        e.preventDefault()
-        let data = { userName: state.email,
-        password:state.password,
-        roles:{"role_id":2}
+    const login = async (e) => {
+        if ({ isToken }.isToken === null || { userid }.userid === null) {
+            e.preventDefault()
+            let data = {
+                userName: state.email,
+                password: state.password,
+                roles: { "role_id": 2 }
+            }
+            let res = await axios.post(`http://localhost:8080/auth-service/verification/login`, data)
+            console.log(res.data.token)
+            console.log(res.data.userId)
+            handleLoginClick()
+            setisToken(res.data.token)
+            setuserid(res.data.userId)
+            sessionStorage.setItem('temp', res.data.token)
+            sessionStorage.setItem('userid', res.data.userId)
+            getuserid(Number(res.data.userId), res.data.token)
+        }
+        else {
+            console.log("aleardy logged in with " + { userid }.userid)
+        }
     }
-        let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
-        console.log(res.data.token)
-        console.log(res.data.userId)
-        handleLoginClick()
-        setisToken(res.data.token)
-        setuserid(res.data.userId)
-        sessionStorage.setItem('temp',res.data.token)
-        sessionStorage.setItem('userid',res.data.userId)
-        getuserid(Number(res.data.userId),res.data.token)
-    }
-    const getuserid = async (id,token) =>
-    {
+
+    const getuserid = async (id, token) => {
         // console.log("id-----------",id)
         // console.log("token----------",token)
-        const create = axios.create({
-            baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
-            timeout: 1000*60*60,
-            headers: {'Authorization': 'Bearer '+token}
-          });
-          let res = await create.get(``)
-          console.log(res.data.data)
-          console.log(res.data.data.userDetailsId)
-          if(!res.data.data)
-          {
-            alert("please fill your details")
-            navigate('/profile')
+        if (id != null && token != null) {
+            const create = axios.create({
+                baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${id}`,
+                timeout: 1000 * 60 * 60,
+                headers: { 'Authorization': 'Bearer ' + token }
+            });
+            let res = await create.get(``)
+            console.log(res.data.data)
+            console.log(res.data.data.userDetailsId)
+            if (!res.data.data) {
+                alert("please fill your details")
+                navigate('/profile')
 
-          }else{
+            } else {
                 setuserdetailId(res.data.data.userDetailsId)
-                sessionStorage.setItem('userdetail',res.data.data.userDetailsId)
-          }
+                sessionStorage.setItem('userdetail', res.data.data.userDetailsId)
+            }
+        }
+        else {
+            console.log("user id and token is empty")
+        }
+
     }
 
-    return(
+    return (
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>
                 <Formbox>
-                <LoginText>
-                    <Text>Login</Text>
-                </LoginText>
-                <br></br>
-                <br></br>
-                <Icon>
-                <PersonSharpIcon></PersonSharpIcon>
-                </Icon>
-                <InputBox placeholder="USERNAME" name='email' value={state.email} onChange={handleChange}></InputBox>
+                    <LoginText>
+                        <Text>Login</Text>
+                    </LoginText>
+                    <br></br>
+                    <br></br>
+                    <Icon>
+                        <PersonSharpIcon></PersonSharpIcon>
+                    </Icon>
+                    <InputBox placeholder="USERNAME" name='email' value={state.email} onChange={handleChange}></InputBox>
                     <br></br><br></br>
                     <Icon>
                         <KeySharpIcon></KeySharpIcon>
