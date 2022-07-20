@@ -59,7 +59,7 @@ const Menulink = styled(Link)
 margin-top:5%;
 font-size: 14px;
 cursor: pointer;
-margin-left: 0%;
+margin-left: 15%;
 padding-bottom:17px;
 color:black;
 text-decoration:none;
@@ -77,7 +77,7 @@ const ulcss = {
   position: 'absolute',
   backgroundColor:'#f4f4f4',
   top:'23.4%',
-  left:'25%',
+  left:'24%',
   width:'13%',
   listStyleType: 'none', 
   padding:'0',

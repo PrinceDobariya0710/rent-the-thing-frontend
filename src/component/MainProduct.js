@@ -42,10 +42,9 @@ border-top: 1px solid gray;
 
 const SearchContainer = styled.div`
   border: 0.5px solid lightgray;
-  display: flex;
-  align-items: center;
-  margin-left: 25px;
+  margin-left: 40%;
   padding: 5px;
+  width:23%;
 `;
 
 const Input = styled.input`
@@ -131,7 +130,7 @@ export const MainProduct = () => {
         else if (val.product.productName.toLowerCase().includes(searchField.toLowerCase())) {
           return val
         }
-      }).map((val,item) => (<Wrapper>
+      }).map((val, item) => (<Wrapper>
         <Card key={val.product.id} >
           <ImgContainer>
             <Image src={`/ecommerce-photos/${val.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail(val.product.id)} />

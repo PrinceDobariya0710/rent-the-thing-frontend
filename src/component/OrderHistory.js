@@ -10,6 +10,7 @@ export const OrderHistory = () => {
   const {isToken, userid, userdetailId} = useContext(LoginContext)
   const getCategoryProduct = async() =>{
     // console.log(params.id)
+    if ({ userdetailId }.userdetailId != null) {
     const create = axios.create({
       baseURL: `http://localhost:8080/orders/order/get/user_history/${userdetailId}`,
       timeout: 1000*60*60,
@@ -19,6 +20,9 @@ export const OrderHistory = () => {
     data =  res.data
     console.log(data)
     setgetdata(data)
+  }else{
+    alert("Please fill your User Details before accessing this page.")
+  }
   }
   useEffect(() => {
     getCategoryProduct()

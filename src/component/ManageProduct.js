@@ -32,9 +32,13 @@ export const ManageProduct = () => {
     size:''
   })
   const getCategory = async() =>{
+    if ({ userdetailId }.userdetailId != null) {
     let res = await axios.get(`http://localhost:8080/products/subcategory/all`)
     setManageProductData(res.data)  
     console.log(ManageProductData)
+    }else{
+      alert("Please fill your User Details before accessing this page.")
+    }
   }
   const getDuration = async() =>{
     let res = await axios.get(`http://localhost:8080/products/duration/all`)
