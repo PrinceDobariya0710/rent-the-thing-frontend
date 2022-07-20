@@ -2,14 +2,23 @@
 {
     display:flex;
     justify-content: center;
-    margin:5% auto;
+    /* margin:5% auto; */
     width:100%;
+    background-image: url(../../public/ecommerce-photos/bgrent2.jfif);
 }
 .maincontainer
 {
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-    padding:2%;
+    /* padding:2%; */
     width:70%;
+    background-color:#fff;
+    padding: 7%;
+    margin:5% auto;
+}
+.maincontainer h1{
+    width:50%;
+    margin-left: 25%;
+    
 }
 .containerpr
 {
@@ -19,12 +28,13 @@
 .form1
 {
     text-align: start;
-  
+    /* background-color:#fff; */
+    /* padding: 7%; */
 }
 .inputbox
 {
     width: 20vw;
-    padding: 1.5%;
+    padding: 0.5%;
     margin: 8px 0;
     display: inline-block;
     border: 0;
@@ -41,11 +51,24 @@
 {
     width:50%;
 }
+.view
+{
+    /* border: 1px black solid; */
+    background-color: #f0d9bc;
+    margin-left: 80%;
+    padding: 1%;
+}
 hr{
     width:100%;
 }
-.btn
+.btnadd
 {
-    margin-left: 5%;
-    /* padding: 5%; */
+    margin-left: 40%;
+    background-color: #f0d9bc;
+    border: 1px #f0d9bc solid;
+    padding: 1%;
+}
+.dropdown
+{
+    width:75%;
 }

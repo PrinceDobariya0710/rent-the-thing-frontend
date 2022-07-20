@@ -3,6 +3,7 @@ import './ManageProduct.css';
 import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
 import { useParams,useNavigate } from 'react-router-dom';
+import DoubleArrowSharpIcon from '@mui/icons-material/DoubleArrowSharp';
 
 export const ManageProduct = () => {
   const {isToken, userid, userdetailId} = useContext(LoginContext)
@@ -129,11 +130,13 @@ export const ManageProduct = () => {
     <main className='mainpr'>
         <section className='maincontainer'>
           <h1>Product Inventory</h1>
+          <section className='view' onClick={() => viewProduct(userdetailId)}><DoubleArrowSharpIcon></DoubleArrowSharpIcon>viewProduct</section>
             <hr></hr>
                 <form className='form1'>
                 <section className='containerpr'>
                   <section className='data'>
-                    <select className='inputbox' onChange={(e) => handleSubcategory(e)} >
+                  <label>Sub Category</label><br></br>
+                    <select className='dropdown' onChange={(e) => handleSubcategory(e)} >
                     <option>---select---</option>
                       {ManageProductData?.map((item) => (
                         <option value={item.id}>{item.subCategory_name}</option>
@@ -142,7 +145,8 @@ export const ManageProduct = () => {
                     <label>Product Name</label> <br></br><input type='text' value={state.productName} name="productName" className='inputbox' onChange={handleChange} /><br></br>
                     <label>Product Rate</label> <br></br><input type='number' value={state.product_rate} name="product_rate" className='inputbox' onChange={handleChange}/><br></br>
                     <label>Product Description</label> <br></br><input type='text' value={state.product_description} name="product_description" className='inputbox' onChange={handleChange}/><br></br>
-                    <select className='inputbox' onChange={handleproductduration} >
+                    <label>Duration</label><br></br>
+                    <select className='dropdown' onChange={handleproductduration} >
                     <option>---select---</option>
                       {isDuration?.map((item) => (
                         <option value={item.id}>{item.duration}</option>
@@ -156,7 +160,7 @@ export const ManageProduct = () => {
                     <label>Available Pieces</label> <br></br><input type='number' value={state.available_pieces} name="available_pieces" onChange={handleChange} className='inputbox'/><br></br>
                     <label>Deposite</label> <br></br><input type='number' value={state.deposit} name="deposit" onChange={handleChange} className='inputbox'/><br></br>
                     <label>Size</label> <br></br>
-                    <select className='inputbox' onChange={handleChange} name="size">
+                    <select className='dropdown' onChange={handleChange} name="size">
                       <option>---select---</option>
                       <option value="XS">XS</option>
                       <option value="S">S</option>
@@ -166,13 +170,11 @@ export const ManageProduct = () => {
                       <option value="XXL">XXL</option>
                     </select>
                     <br></br>
-                    <label>Upload Product Image</label><br></br><input type="file" className='inputbox' onChange={(e)=>handleImageChange(e.target.files[0])}/><br></br>
+                    <label>Upload Product Image</label><br></br><input type="file" className='inputbox' onChange={(e)=>handleImageChange(e.target.files[0])}/><br></br><br></br>
                     </section>  
                     </section>
-                    <input type="submit" value="Add Product" className='btn' onClick={(e)=>addproduct(e)}/>
-                    <input type="submit" value="Update Product" className='btn'/>
-                    <input type="submit" value="Delete Product" className='btn'/>
-                    <input type="submit" value="View Product" className='btn' onClick={() => viewProduct(userdetailId)}/>
+                    <input type="submit" value="Add Product" className='btnadd' onClick={(e)=>addproduct(e)}/>
+                    {/* <input type="submit" value="View Product" className='btn' onClick={() => viewProduct(userdetailId)}/> */}
                 </form>
             </section>
     </main>

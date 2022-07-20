@@ -127,9 +127,7 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
                 </>
             }
             <MenuLink to="/cart">
-              <Badge badgeContent={4} color="primary">
                 <ShoppingCartIcon />
-              </Badge>
             </MenuLink>
           </Right>
         </Wrapper>

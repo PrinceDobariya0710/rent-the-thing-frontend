@@ -1,31 +1,36 @@
-.usermain
-{
+.usermain {
     display: flex;
     width: 100%;
+    background-image: url(../../public/ecommerce-photos/bgrent2.jfif);
 }
-.detailcontainer
-{
-    width:20%;
-    height:20%;
-    margin: 5% auto;
+
+.detailcontainer {
+    /* width: 20%; */
+    height: 20%;
+    margin: 5% 1% 5% 33% ;
     display: flex;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
-.userform
-{
+
+.userform {
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+    background-color:#fff;
+    padding: 7%;
+    width: 130%;
 }
-.userdetail
-{
+
+.userdetail {
     /* margin-left: 2%; */
-    text-align: start;
+    /* text-align: center;
+    position: absolute;
+    background-color: rgba(256, 256, 256, 0.5); */
 }
-.navigationcontainer
-{
+
+.navigationcontainer {
     /* width:10% */
 }
-.inputbox
-{
+
+.inputbox {
     width: 17vw;
     padding: 1.5%;
     margin: 8px 0;
@@ -35,13 +40,39 @@
     outline: none;
     background: transparent;
 }
+
 .addDetail {
     margin-top: 5%;
     background-color: #f0d9bc;
-    color:black;
+    color: black;
 }
-.profiledetail
-{
-    
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+
+.profiledetail{
+    width: 130%;
+    padding: 7%;
+    background-color:#fff;
+}
+
+.profiledetail p {
+    margin: 20px;
+    text-align: start;
+}
+
+.profiledetail h3 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* padding: 15px; */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.imageProfile {
+    width: 100px;
+    height: 100px;
+}
+
+.divimage {
+    margin-top: 20px;
+    text-align: center;
+    justify-content: center;
 }

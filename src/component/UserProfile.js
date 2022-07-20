@@ -1,13 +1,13 @@
-import React, { useState, useContext,useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Userprofile.css';
 import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const UserProfile = () => {
-  const {isToken,userid,setuserid} = useContext(LoginContext)
-  const {userdetailId,setuserdetailId} = useContext(LoginContext)
-  const [detail,setdetail] = useState([])
+  const { isToken, userid, setuserid } = useContext(LoginContext)
+  const { userdetailId, setuserdetailId } = useContext(LoginContext)
+  const [detail, setdetail] = useState([])
   const [state, setState] = useState(
     {
       firstName: '',
@@ -16,7 +16,7 @@ export const UserProfile = () => {
       website: '',
       dob: ''
     })
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleChange = (e) => {
     setState((prevState) => ({
       ...prevState,
@@ -24,14 +24,13 @@ export const UserProfile = () => {
     }))
   }
   console.log(isToken)
-  console.log(userid) 
-  const showdetail = async() =>
-  {
+  console.log(userid)
+  const showdetail = async () => {
     const create = axios.create({
       baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${userid}`,
-      timeout: 1000*60*60,
-      headers: {'Authorization': 'Bearer '+isToken}
-  });
+      timeout: 1000 * 60 * 60,
+      headers: { 'Authorization': 'Bearer ' + isToken }
+    });
 
     let res = await create.get(``)
     console.log(res.data.data)
@@ -49,37 +48,42 @@ export const UserProfile = () => {
     }
     const create = axios.create({
       baseURL: `http://localhost:8080/user-profile-service/register/profiledata/`,
-      timeout: 1000*60*60,
-      headers: {'Authorization': 'Bearer '+isToken}
+      timeout: 1000 * 60 * 60,
+      headers: { 'Authorization': 'Bearer ' + isToken }
     });
 
-    let res = await create.post(``,detail)
+    let res = await create.post(``, detail)
     console.log(res.data.userDetailsId)
     // setuserid(res.data.userDetailsId)
     setuserdetailId(res.data.userDetailsId)
-    sessionStorage.setItem('userdetail',res.data.userDetailsId)
+    sessionStorage.setItem('userdetail', res.data.userDetailsId)
     alert("successfully added your detail")
     navigate('/')
   }
   useEffect(() => {
-      showdetail()
-  },)
+    showdetail()
+  })
   return (
-      <main className='usermain'>
+    <main className='usermain'>
       <section className='detailcontainer'>
-          <section className='userdetail'>
-            {userdetailId &&
-              <section className='profiledetail'>
+        <section className='userdetail'>
+          {userdetailId &&
+            <section className='profiledetail'>
+              <div className='divimage'>
+                <img src={`/ecommerce-photos/userProfile.png`} className='imageProfile' />
+              </div>
+              <div>
                 <h3>My Profile</h3>
-                Name : {detail.firstName} {detail.lastName}<br></br><br></br>
-                OrgName : {detail.orgName}<br></br><br></br>
-                Website : {detail.website}<br></br><br></br>
-                DateOfBirth : {detail.dob}<br></br>
-              </section>}
-              {!userdetailId && 
+                <p>Name : {detail.firstName} {detail.lastName}</p>
+                <p>OrgName : {detail.orgName}</p>
+                <p>Website : {detail.website}</p>
+                <p>DateOfBirth : {detail.dob}</p>
+              </div>
+            </section>}
+          {!userdetailId &&
             <form className='userform'>
               <label>FirstName : </label>
-              <input type="text" className='inputbox' name='firstName' value={state.firstName}  onChange={handleChange} /><br></br>
+              <input type="text" className='inputbox' name='firstName' value={state.firstName} onChange={handleChange} /><br></br>
               <label>LastName : </label>
               <input type="text" className='inputbox' name='lastName' value={state.lastName} onChange={handleChange} /><br></br>
               <label>OrgName : </label>
@@ -90,10 +94,10 @@ export const UserProfile = () => {
               <input type="date" className='inputbox' name='dob' value={state.dob} onChange={handleChange} /><br></br>
               <input type="submit" value="AddDetail" className='addDetail' onClick={addData} />
             </form>}
-          </section>
-          <section className='navigationcontainer'>
-          </section>
+        </section>
+        <section className='navigationcontainer'>
+        </section>
       </section>
-    </main>    
+    </main>
   )
 }
