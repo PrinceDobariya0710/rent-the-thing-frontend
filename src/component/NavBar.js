@@ -1,10 +1,11 @@
 import { Badge } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
 import styled from "styled-components";
 import { mobile,tablet } from "../Responsive";
 import { Link } from "react-router-dom";
+import { LoginContext } from "../context/LoginContext";
 
 const Container = styled.div`
   height: 3%;
@@ -79,6 +80,7 @@ cursor: pointer;
 margin-left: 25px;
 padding: 5%;
 color:black;
+text-decoration:none;
 ${tablet({ fontSize: "14px" })}
 ${mobile({ fontSize: "10px", marginLeft: "8px" })}
 
@@ -87,6 +89,7 @@ ${mobile({ fontSize: "10px", marginLeft: "8px" })}
 const NavBar = ({handleLoginClick,handleRegisterClick})=>
 {
   const [Auth,setAuth] = useState(false)
+  const {username} = useContext(LoginContext)
   const AuthFunction = () =>
   {
     let d = sessionStorage.getItem('temp')
@@ -114,7 +117,10 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
           <Right>
             {
                 Auth ? 
-                <MenuItem onClick={logout}>Logout</MenuItem>:
+                <>
+                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuLink to="/profile">{username}</MenuLink>
+                </>:
                 <>
                 <MenuItem onClick={handleRegisterClick}>REGISTER</MenuItem>
                 <MenuItem onClick={handleLoginClick}>SIGN IN</MenuItem>

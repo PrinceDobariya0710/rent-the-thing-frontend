@@ -3,6 +3,7 @@ import { createContext ,useState} from "react";
 const initialState = sessionStorage.getItem('temp')
 const userID = sessionStorage.getItem('userid')
 const userDetails = sessionStorage.getItem('userdetail')
+const userName = sessionStorage.getItem('name')
 
 export const LoginContext = createContext({
 
@@ -13,6 +14,7 @@ export const LoginProvider =({children})=>{
 const [isToken,setisToken] = useState(initialState)
 const [userid,setuserid] = useState(userID)
 const [userdetailId,setuserdetailId] = useState(userDetails)
+const [username,setusername] = useState(userName)
     return(
     <LoginContext.Provider value={{
     isToken,
@@ -20,7 +22,9 @@ const [userdetailId,setuserdetailId] = useState(userDetails)
     userid,
     setuserid,
     userdetailId,
-    setuserdetailId
+    setuserdetailId,
+    username,
+    setusername
     }}>
     
     {children}

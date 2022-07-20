@@ -8,6 +8,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import KeySharpIcon from '@mui/icons-material/KeySharp';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import axios from 'axios';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Main = styled.main`
     display:flex;
@@ -123,6 +124,13 @@ cursor: pointer;
       ${mobile({ fontSize: "12px" })}
 `;
 
+const iconcss =
+{
+    marginLeft:'85%',
+    marginTop:'3%',
+    cursor:'pointer'
+}
+
 const Register = ({ isShowRegister, LoginClick, handleRegisterClick }) => {
     const [otpBox, setOtpBox] = useState(false)
     const [passwordBox, setPasswordBox] = useState(false)
@@ -186,6 +194,7 @@ const Register = ({ isShowRegister, LoginClick, handleRegisterClick }) => {
         <Main className={`${!isShowRegister ? "active" : ""} show `}>
             <section className="reg-form" >
                 <RegBox id="form1" >
+                    <CloseIcon style={iconcss} onClick={handleRegisterClick}> </CloseIcon>
                     <LoginText>
                         <Text>Register</Text>
                     </LoginText><br></br><br></br>

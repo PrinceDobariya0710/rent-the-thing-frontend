@@ -2,11 +2,13 @@ import React,{useEffect,useState,useContext} from 'react';
 import './ManageProduct.css';
 import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
+import { useParams,useNavigate } from 'react-router-dom';
 
 export const ManageProduct = () => {
   const {isToken, userid, userdetailId} = useContext(LoginContext)
   const [ManageProductData,setManageProductData]=useState()
   const [isDuration,setisDuraction] = useState()
+  const navigate = useNavigate()
   const [state, setState] = useState(
   {
     userDetailsId:{
@@ -31,18 +33,24 @@ export const ManageProduct = () => {
   const getCategory = async() =>{
     let res = await axios.get(`http://localhost:8080/products/subcategory/all`)
     setManageProductData(res.data)  
-    console.log(ManageProductData)
+    // console.log(ManageProductData)
   }
   const getDuration = async() =>{
     let res = await axios.get(`http://localhost:8080/products/duration/all`)
     setisDuraction(res.data)  
-    console.log(isDuration)
+    // console.log(isDuration)
+  }
+
+  const viewProduct = (id) =>
+  {
+    console.log(id)
+    navigate(`/ownerproduct/${id}`)
   }
   const addproduct = async() =>
   {
     let detail =
     {
-
+      
     }
     const create = axios.create({
       baseURL: `http://localhost:8080/user-profile-service/register/profiledata/`,
@@ -51,6 +59,7 @@ export const ManageProduct = () => {
     });
     let res = await create.post(``,detail)
     console.log(res.data.userDetailsId)
+    // userdetailid = res.data.userDetailsId
   }
   const handleChange = (e) => {
     setState((prevState) => ({
@@ -77,7 +86,7 @@ export const ManageProduct = () => {
   useEffect(() => {
     getCategory()
     getDuration()
-  }, [] );
+  },[] );
 
   return (
     <main className='mainpr'>
@@ -125,6 +134,7 @@ export const ManageProduct = () => {
                     <input type="submit" value="Add Product" className='btn' onClick={addproduct}/>
                     <input type="submit" value="Update Product" className='btn'/>
                     <input type="submit" value="Delete Product" className='btn'/>
+                    <input type="submit" value="View Product" className='btn' onClick={() => viewProduct(userdetailId)}/>
                 </form>
             </section>
     </main>

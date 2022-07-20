@@ -34,29 +34,28 @@ export const OrderHistory = () => {
         </section>
         <section className='column2'>
             Product Name: {item.product.productName}<br></br>
-            {/* {item.attribute.attributeTitle}: {item.attributeValue}<br></br> */}
+            Size : {item.clothingProduct.size}<br></br>
             Duration: {item.product.productDurationRates.duration} <br></br>
             Price: {item.product.value_duration}<br></br>
             Seller: {item.product.userDetailsId.firstName} {item.product.userDetailsId.lastName}
         </section>
         <section className='column3'>
             <p>Status</p>
-            <h6>Pending</h6>
+            <h6>{item.orderStatus.orderStatus}</h6>
         </section>
         <section className='column3'>
           <p>Issue Date</p>
-          <h6>7/05/2022</h6>
+          <h6>{item.issuedDate}</h6>
         </section>
         <section className='column3'>
           <p>Return Date</p>
-          <h6>7/05/2022</h6>
+          <h6>{item.returnDate}</h6>
         </section>
         <section className='column3'>
           <p>OrderType</p>
-          <h6>OrderType</h6>
+          <h6>{item.orderType.orderType}</h6>
         </section>
        </section>
-
       ))
       }
         </section>

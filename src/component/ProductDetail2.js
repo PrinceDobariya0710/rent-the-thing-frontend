@@ -126,12 +126,13 @@ ${tablet({width:"12%",top:"15%",left:"30%"})}
 `;
 
 const ProductDetail2 = ({id}) => {
+  // console.log(id)
   const [DetailData,setDetailData]=useState()
   const [AddressData,setAddressData]=useState()
   const [ContactData,setContactData]=useState()
   const {isToken, userid, userdetailId} = useContext(LoginContext)
   const navigate = useNavigate();
-  console.log(userdetailId);
+  // console.log(userdetailId);
   let data
   // let token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZDEyQGdtYWlsLmNvbSIsInJvbGUiOnsicm9sZV9pZCI6Miwicm9sZV9uYW1lIjoiQURNSU4ifSwiaWQiOjE5LCJleHAiOjE2NTc5MDM2NjMsImlhdCI6MTY1Nzg2NzY2M30.qqaITrpYDHytA88QMJUOKwmTmGZSt6Le89FvIRYv4tU"
   const getDetailProduct = async() =>{
@@ -142,21 +143,22 @@ const ProductDetail2 = ({id}) => {
     });
     let res = await create.get(``)
     data = res.data
-    console.log(data)
+    // console.log(data)
     setDetailData(data)
-    setAddressData(data.userDetails.address.data)
-    setContactData(data.userDetails.contact.data)
+    // setAddressData(data.userDetails.address.data)
+    // setContactData(data.userDetails.contact.data)
   }
   let price = DetailData?.clothingProducts.product.value_duration
   const [state, setState] = useState(
     {
       userDetails:{userDetailsId:''},
-      product:{id:''},
+      productDetails:{id:''},
+      clothingProduct:{clothingProductId:''},
       issuedDate:'',
       returnDate:'',
       quantity:'',
       totalPay:'',
-      ratings:''
+      ratings:'',
     })
   const handleChange = (e) => {
     setState((prevState) => ({
@@ -166,10 +168,12 @@ const ProductDetail2 = ({id}) => {
   }
   const AddOrder = async(e) =>
   {
+    console.log(DetailData.clothingProducts.product.id)
     e.preventDefault()
     let data = {
       userDetails:{userDetailsId:Number(userdetailId)},
       product:{id:DetailData.clothingProducts.product.id},
+      clothingProduct:{clothingProductId:DetailData.clothingProducts.clothingProductId},
       orderType:{orderTypeId:1},
       orderStatus:{id:1},
       issuedDate:state.issuedDate,
@@ -178,7 +182,7 @@ const ProductDetail2 = ({id}) => {
       totalPay:price * state.quantity,
       ratings:''
     }
-    console.log(data)
+    // console.log(data)
     const create = axios.create({
       baseURL: `http://localhost:8080/orders/order/create/`,
       timeout: 1000*60*60,
@@ -191,7 +195,7 @@ const ProductDetail2 = ({id}) => {
   }
   useEffect(() => {
     getDetailProduct()
-  },[] );
+  }, );
   
   return (
 

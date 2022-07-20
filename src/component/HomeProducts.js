@@ -4,6 +4,8 @@ import styled from "styled-components";
 import ProductDetailPage from '../Pages/ProductDetailPage';
 import { mobile ,tablet} from "../Responsive";
 import axios from 'axios';
+import { useParams,useNavigate } from 'react-router-dom';
+import { LoginContext } from '../context/LoginContext';
 
 const Container = styled.header`
   padding-left:6%;
@@ -72,7 +74,7 @@ const InfoContainer = styled.section`
 
 export const HomeProducts = () => {
 let pro
-
+const navigate = useNavigate()
 const [productData,setProductData]=useState()
   const getLatestProduct = async() =>{
     let res = await axios.get(`http://localhost:8080/products/cloth-product/user/get/all-cproducts/`)
@@ -82,7 +84,12 @@ const [productData,setProductData]=useState()
   useEffect(() => {
     getLatestProduct()
   },[] );
-  
+  const ShowDetail = (id) =>
+    {
+      // console.log("hello")
+      navigate(`/detail/${id}`)
+
+    }
   // const [isShowProduct,setIsShowProduct] = useState(false)
   // const handleProductClick = () => {
   //     if(closeProduct===false)
@@ -112,7 +119,7 @@ const [productData,setProductData]=useState()
        {productData?.map((item) => ( <Wrapper>
         <Card key={item.product.id}>
         <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%"/>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail(item.product.id)}/>
          </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>

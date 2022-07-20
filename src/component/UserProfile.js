@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext,useEffect } from 'react';
 import './Userprofile.css';
 import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
@@ -7,6 +7,7 @@ import {useNavigate} from 'react-router-dom';
 export const UserProfile = () => {
   const {isToken,userid,setuserid} = useContext(LoginContext)
   const {userdetailId,setuserdetailId} = useContext(LoginContext)
+  const [detail,setdetail] = useState()
   const [state, setState] = useState(
     {
       firstName: '',
@@ -23,7 +24,19 @@ export const UserProfile = () => {
     }))
   }
   console.log(isToken)
-  console.log(userid) 
+  console.log(userdetailId) 
+  const showdetail = async() =>
+  {
+    const create = axios.create({
+      baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${userdetailId}`,
+      timeout: 1000*60*60,
+      headers: {'Authorization': 'Bearer '+isToken}
+    });
+
+    let res = await create.get(``)
+    console.log(res.data.data)
+    setdetail(res.data.data)
+  }
   const addData = async (e) => {
     e.preventDefault()
     // console.log("added")
@@ -44,14 +57,22 @@ export const UserProfile = () => {
     console.log(res.data.userDetailsId)
     // setuserid(res.data.userDetailsId)
     setuserdetailId(res.data.userDetailsId)
+    sessionStorage.setItem('userdetail',res.data.userDetailsId)
     alert("successfully added your detail")
     navigate('/')
   }
-  
+  useEffect(() => {
+      showdetail()
+  }, [])
   return (
-    <main className='usermain'>
+      <main className='usermain'>
       <section className='detailcontainer'>
           <section className='userdetail'>
+            {
+              <section>
+                name:{detail}
+              </section>
+            }
             <form className='userform'>
               <label>FirstName : </label>
               <input type="text" className='inputbox' name='firstName' value={state.firstName}  onChange={handleChange} /><br></br>
@@ -67,9 +88,8 @@ export const UserProfile = () => {
             </form>
           </section>
           <section className='navigationcontainer'>
-
           </section>
       </section>
-    </main>
+    </main>    
   )
 }

@@ -8,6 +8,7 @@ import KeySharpIcon from '@mui/icons-material/KeySharp';
 import { mobile } from "../Responsive";
 import axios from 'axios';
 import { LoginContext } from '../context/LoginContext';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Main = styled.main`
     display:flex;
@@ -91,7 +92,12 @@ cursor: pointer;
       color: #295e81;
       ${mobile({ fontSize:"12px"})}
 `;
-
+const iconcss =
+{
+    marginLeft:'85%',
+    marginTop:'3%',
+    cursor:'pointer'
+}
 const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
 {
     const {isToken,setisToken} = useContext(LoginContext)
@@ -115,12 +121,13 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
         password:state.password,
         roles:{"role_id":2}
     }
-        let res =await  axios.post(`http://localhost:8080/auth-service/verification/login`,data)
-        console.log(res.data.token)
+        let res =await axios.post(`http://localhost:8080/auth-service/verification/login`,data)
+        console.log(res.data)
         console.log(res.data.userId)
         handleLoginClick()
         setisToken(res.data.token)
         setuserid(res.data.userId)
+        sessionStorage.setItem('name',res.data.user_name)
         sessionStorage.setItem('temp',res.data.token)
         sessionStorage.setItem('userid',res.data.userId)
         getuserid(Number(res.data.userId),res.data.token)
@@ -152,6 +159,7 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
         <Main className={`${!isShowLogin ? "active" : ""} show`} >
             <section className="login-form"><br></br>
                 <Formbox>
+                <CloseIcon style={iconcss} onClick={handleLoginClick}> </CloseIcon>
                 <LoginText>
                     <Text>Login</Text>
                 </LoginText>

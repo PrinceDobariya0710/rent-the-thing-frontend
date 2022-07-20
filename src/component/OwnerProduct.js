@@ -71,43 +71,33 @@ const InfoContainer = styled.section`
   ${mobile({padding:"0px" })}
 `;
 
-let data
-export const MainProduct = () => {
-    const params = useParams()
-    const navigate = useNavigate()
-    // console.log(params.id)
-    const [dataLoad,setdataLoad] = useState()
-  
-    const {isToken, userid, userdetailId} = useContext(LoginContext)
-    const getCategoryProduct = async() =>{
+
+export const OwnerProduct = ({id}) => {
+    console.log(id)
+    let data
+const [getdata,setgetdata] = useState([])
+  const {isToken, userid, userdetailId} = useContext(LoginContext)
+    const getOwnerProduct = async() =>{
         // console.log(params.id)
         const create = axios.create({
-          baseURL: `http://localhost:8080/products/cloth-product/user/get-categorywise-cproduct/?subcategory-id=${params.id}`,
+          baseURL: `http://localhost:8080/products/cloth-product/get/owner_cproducts/?user_details_id=${id}`,
           timeout: 1000*60*60,
           headers: {'Authorization': 'Bearer '+isToken}
         });
-        // let res = await axios.get(`http://localhost:8080/products/cloth-product/user/get-categorywise-cproduct/?subcategory-id=${params.id}`)
-        // console.log(res)
         let res =  await create.get(``)
-        data =  res.data
-        // console.log(data)
-        setdataLoad(data)
+        data =  res.data.data
+        console.log(data)
+        setgetdata(data)
       }
-      
       useEffect(() => {
-        getCategoryProduct()
+        getOwnerProduct()
     }, []);
-
-    const ShowDetail = (id) =>
-    {
-      navigate(`/detail/${id}`)
-    }
   return (
     <Container>
-    {dataLoad?.map((item) => ( <Wrapper>
+    {getdata?.map((item) => ( <Wrapper>
      <Card key={item.product.id} >
        <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail(item.product.id)}/>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" />
          </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>
@@ -119,5 +109,3 @@ export const MainProduct = () => {
  </Container>  
   )
 }
-
-export default MainProduct

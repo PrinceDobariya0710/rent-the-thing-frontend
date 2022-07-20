@@ -16,6 +16,7 @@ import { ManageProductPage } from './Pages/ManageProductPage';
 import { NotificationPage } from './Pages/NotificationPage';
 import { createContext } from "react";
 import { LoginProvider } from './context/LoginContext';
+import { OwnerProductPage } from './Pages/OwnerProductPage';
 
 function App() {
   // const [isToken,setisToken] = useState()
@@ -33,6 +34,7 @@ function App() {
         <Route path='/detail/:id' element={<DetailPage/>}/>
         <Route path='/inventory' element={<ManageProductPage/>}/>
         <Route path='/notification' element={<NotificationPage/>}/>
+        <Route path='/ownerproduct/:id' element={<OwnerProductPage/>}/>
       </Routes>
       </BrowserRouter>
       </LoginProvider>
