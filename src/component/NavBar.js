@@ -109,10 +109,10 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
         <Wrapper>
           <Left>
             <Logo to="/">RentTheThing</Logo>
-            <SearchContainer>
+            {/* <SearchContainer>
                 <Input placeholder="Search" />
                 <SearchIcon style={{ color: "gray", fontSize: 14, width: 20, height: 20 }} />
-              </SearchContainer>
+              </SearchContainer> */}
           </Left>
           <Right>
             {

@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 export const UserProfile = () => {
   const {isToken,userid,setuserid} = useContext(LoginContext)
   const {userdetailId,setuserdetailId} = useContext(LoginContext)
-  const [detail,setdetail] = useState()
+  const [detail,setdetail] = useState([])
   const [state, setState] = useState(
     {
       firstName: '',
@@ -24,14 +24,14 @@ export const UserProfile = () => {
     }))
   }
   console.log(isToken)
-  console.log(userdetailId) 
+  console.log(userid) 
   const showdetail = async() =>
   {
     const create = axios.create({
-      baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${userdetailId}`,
+      baseURL: `http://localhost:8080/user-profile-service/get/user_details/?user_id=${userid}`,
       timeout: 1000*60*60,
       headers: {'Authorization': 'Bearer '+isToken}
-    });
+  });
 
     let res = await create.get(``)
     console.log(res.data.data)
@@ -63,16 +63,20 @@ export const UserProfile = () => {
   }
   useEffect(() => {
       showdetail()
-  }, [])
+  },)
   return (
       <main className='usermain'>
       <section className='detailcontainer'>
           <section className='userdetail'>
-            {
-              <section>
-                name:{detail}
-              </section>
-            }
+            {userdetailId &&
+              <section className='profiledetail'>
+                <h3>My Profile</h3>
+                Name : {detail.firstName} {detail.lastName}<br></br><br></br>
+                OrgName : {detail.orgName}<br></br><br></br>
+                Website : {detail.website}<br></br><br></br>
+                DateOfBirth : {detail.dob}<br></br>
+              </section>}
+              {!userdetailId && 
             <form className='userform'>
               <label>FirstName : </label>
               <input type="text" className='inputbox' name='firstName' value={state.firstName}  onChange={handleChange} /><br></br>
@@ -85,7 +89,7 @@ export const UserProfile = () => {
               <label>BirthDate : </label>
               <input type="date" className='inputbox' name='dob' value={state.dob} onChange={handleChange} /><br></br>
               <input type="submit" value="AddDetail" className='addDetail' onClick={addData} />
-            </form>
+            </form>}
           </section>
           <section className='navigationcontainer'>
           </section>

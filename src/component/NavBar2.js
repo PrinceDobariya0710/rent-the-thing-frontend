@@ -56,10 +56,10 @@ ${mobile({ fontSize: "10px", marginLeft: "8px" })}
 `;
 const Menulink = styled(Link)
 `
-margin-top:7px;
+margin-top:5%;
 font-size: 14px;
 cursor: pointer;
-margin-left: 0px;
+margin-left: 0%;
 padding-bottom:17px;
 color:black;
 text-decoration:none;
@@ -76,14 +76,14 @@ ${mobile({ fontSize: "10px", marginLeft: "8px" })}
 const ulcss = {
   position: 'absolute',
   backgroundColor:'#f4f4f4',
-  top:'23.3%',
+  top:'23.4%',
   left:'25%',
   width:'13%',
   listStyleType: 'none', 
   padding:'0',
   alignItems: 'center',
+  textAlign:'start',
   zIndex:'100',
-  marginLeft:'2%',
 };
 
 let data
