@@ -55,6 +55,16 @@ export const Notification = () => {
     console.log(res.data)
     getNotification();
   }
+  const completeOrder = async (id) => {
+    const create = axios.create({
+      baseURL: `http://localhost:8080/orders/order/changestatus/4/${id}`,
+      timeout: 1000 * 60 * 60,
+      headers: { 'Authorization': 'Bearer ' + isToken }
+    });
+    let res = await create.put(``)
+    console.log(res.data)
+    getNotification();
+  }
 
   useEffect(() => {
     getNotification()
@@ -78,8 +88,21 @@ export const Notification = () => {
             </section>
             <section className='c3'>
               {console.log(item.order.orderId)}
-              <button className='confirm' onClick={() => confirmOrder(item.order.orderId)}>Confirm</button><br />
-              <button className='decline' onClick={() => cancelOrder(item.order.orderId)}>Decline</button>
+              {
+                item.order.orderStatus.orderStatus == "Accepted and On Rent" &&
+                <button className='completed' onClick={() => completeOrder(item.order.orderId)}>completed</button>
+              }
+              {
+                item.order.orderStatus.orderStatus == "Notified to owner" &&
+                <>
+                <button className='confirm' onClick={() => confirmOrder(item.order.orderId)}>Confirm</button><br />
+                <button className='decline' onClick={() => cancelOrder(item.order.orderId)}>Decline</button>
+                </>
+              }
+              {item.order.orderStatus.orderStatus == "Returned and Completed" && item.order.orderStatus.orderStatus == "Rejected" &&
+                <>
+                </>
+              }
             </section>
           </section>
         ))
