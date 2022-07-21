@@ -32,7 +32,7 @@ export const Cart = () => {
       headers: {'Authorization': 'Bearer '+isToken}
     });
     let res = await create.put(``)
-    // getCartProduct()
+    getCartProduct()
     console.log(res.data)
   }
    useEffect(() => {
@@ -62,7 +62,7 @@ export const Cart = () => {
       ))
       }
       </section>
-      <section className='total'>
+      {/* <section className='total'>
         <h5>PRICE DETAILS</h5>
         <hr></hr>
         {Product.map((item) =>
@@ -77,9 +77,8 @@ export const Cart = () => {
         <article className='price'>
             <h5>TOTAL</h5>
             <h5>5000</h5>
-            {/* <p>{item.product.value_duration}</p> */}
           </article>
-      </section>
+      </section> */}
     </main>
   )
 }

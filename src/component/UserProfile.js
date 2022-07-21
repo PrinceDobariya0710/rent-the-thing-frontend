@@ -62,7 +62,7 @@ export const UserProfile = () => {
   }
   useEffect(() => {
     showdetail()
-  })
+  },[]);
   return (
     <main className='usermain'>
       <section className='detailcontainer'>

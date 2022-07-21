@@ -130,7 +130,9 @@ const LoginForm = ({ isShowLogin ,RegClick,handleLoginClick}) =>
         sessionStorage.setItem('name',res.data.user_name)
         sessionStorage.setItem('temp',res.data.token)
         sessionStorage.setItem('userid',res.data.userId)
+        sessionStorage.setItem('userdetailid',res.data.userId)
         getuserid(Number(res.data.userId),res.data.token)
+        // window.location.reload()
     }
     const getuserid = async (id,token) =>
     {

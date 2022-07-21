@@ -101,8 +101,10 @@ const NavBar = ({handleLoginClick,handleRegisterClick})=>
   }, [])
   const logout = () =>
   {
+    
     sessionStorage.removeItem('temp');
     sessionStorage.clear();
+    window.location.reload()
   }
     return (
       <Container>

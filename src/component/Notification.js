@@ -6,9 +6,10 @@ import { mobile, tablet } from "../Responsive";
 import "./Notification.css";
 import CloseIcon from '@mui/icons-material/Close';
 import { LoginContext } from '../context/LoginContext';
+import {useNavigate} from 'react-router-dom';
 
 export const Notification = () => {
-
+  const navigate = useNavigate();
   let data;
   const [getdata, setgetdata] = useState([])
   const { isToken, userid, userdetailId } = useContext(LoginContext)
@@ -28,6 +29,7 @@ export const Notification = () => {
     }
     else {
       alert("Please fill your User Details before accessing this page.")
+      navigate(`/profile`)
     }
   }
 
@@ -71,7 +73,8 @@ export const Notification = () => {
               {/* {item.attribute.attributeTitle}: {item.attributeValue}<br></br> */}
               Duration: {item.order.product.productDurationRates.duration} <br></br>
               Price: {item.order.product.value_duration}<br></br>
-              Seller: {item.order.product.userDetailsId.firstName} {item.ownerUser.lastName}
+              Seller: {item.order.product.userDetailsId.firstName} {item.ownerUser.lastName}<br></br>
+              Status : {item.order.orderStatus.orderStatus}
             </section>
             <section className='c3'>
               {console.log(item.order.orderId)}

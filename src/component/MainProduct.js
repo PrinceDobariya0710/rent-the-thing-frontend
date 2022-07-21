@@ -139,7 +139,7 @@ export const MainProduct = () => {
             <Title>{val.product.productName}</Title>
             <Amount>Rs{val.product.value_duration}</Amount>
           </InfoContainer>
-          <Button>AddToCart</Button>
+          {/* <Button>AddToCart</Button> */}
         </Card>
       </Wrapper>))}
     </Container>

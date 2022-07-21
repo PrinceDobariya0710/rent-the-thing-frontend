@@ -179,9 +179,10 @@ const Register = ({ isShowRegister, LoginClick, handleRegisterClick }) => {
             email: state.email,
             password: state.password,
             createdAt: "2022-05-22",
-            role: { "role_id": 2 }
+            role: { "role_id": 2 },
+            authProvider:"LOCAL"
         }
-        let res = await axios.post(`http://localhost:8081/api/auth/signup`,data)
+        let res = await axios.post(`http://localhost:8080/auth-service/verification/signup`,data)
         console.log(res)
         handleRegisterClick()
     }
@@ -209,7 +210,7 @@ const Register = ({ isShowRegister, LoginClick, handleRegisterClick }) => {
                     <Icon>
                         <KeySharpIcon></KeySharpIcon>
                     </Icon>
-                    <InputBox name='password' value={state.password} onChange={handleChange} placeholder="Password"></InputBox><br></br>
+                    <InputBox type="password" name='password' value={state.password} onChange={handleChange} placeholder="Password"></InputBox><br></br>
                     {/* <Icon>
                 <KeySharpIcon></KeySharpIcon>
                 </Icon>
