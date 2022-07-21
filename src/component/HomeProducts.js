@@ -47,7 +47,7 @@ const Title = styled.h1`
 `;
 
 const Card = styled.article`
-  height: 20%;
+  height: 30%;
   // display: inline-block;
   margin:60px;
   border:1px solid gray;
@@ -119,13 +119,13 @@ const [productData,setProductData]=useState()
        {productData?.map((item) => ( <Wrapper>
         <Card key={item.product.id}>
         <ImgContainer>
-         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="30%" width="100%" onClick={() => ShowDetail(item.product.id)}/>
+         <Image src={`/ecommerce-photos/${item.product.product_image}`} height="20%" width="100%" onClick={() => ShowDetail(item.product.id)}/>
          </ImgContainer>
          <InfoContainer>
          <Title>{item.product.productName}</Title>
          <Amount>Rs{item.product.value_duration}</Amount>
        </InfoContainer>
-       <Button>AddToCart</Button>
+       {/* <Button>AddToCart</Button> */}
      </Card>
     </Wrapper>
     ))}
